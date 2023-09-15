@@ -190,7 +190,7 @@ class user:
     def drawFP(self):
         self.builder_.AddParameter('storyAdjustIds', '[]')
         self.builder_.AddParameter('gachaId', '1')
-        self.builder_.AddParameter('num', '10')
+        self.builder_.AddParameter('num', '50')
         self.builder_.AddParameter('ticketItemId', '0')
         self.builder_.AddParameter('shopIdIndex', '1')
 
