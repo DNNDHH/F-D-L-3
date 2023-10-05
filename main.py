@@ -82,18 +82,6 @@ def main():
                 except Exception as ex:
                     logger.error(ex)
                     
-                try:
-                   time.sleep(2)
-                   instance.topHome()
-                   time.sleep(2)
-                   logger.info('开始友情点召唤!')
-                   instance.drawFP() 
-                   time.sleep(2)
-                   for _ in range(1):
-                      instance.drawFP()
-                      time.sleep(2)
-                except Exception as ex:
-                    logger.error(ex)
                     
             except Exception as ex:
                 logger.error(ex)
