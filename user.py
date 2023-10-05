@@ -69,7 +69,7 @@ class ParameterBuilder:
 
 
 class Rewards:
-    def __init__(self, stone, level, ticket, goldenfruit, silverfruit, bronzefruit, bluebronzesapling, bluebronzefruit, qpss, manaprism, pureprism, rm01, sqf01, holygrail):
+    def __init__(self, stone, level, ticket, goldenfruit, silverfruit, bronzefruit, bluebronzesapling, bluebronzefruit, pureprism, sqf01, holygrail):
         self.stone = stone
         self.level = level
         self.ticket = ticket
@@ -78,10 +78,7 @@ class Rewards:
         self.bronzefruit = bronzefruit
         self.bluebronzesapling = bluebronzesapling
         self.bluebronzefruit = bluebronzefruit
-        self.qpss = qpss
-        self.manaprism = manaprism
         self.pureprism = pureprism
-        self.rm01 = rm01
         self.sqf01 = sqf01
         self.holygrail = holygrail
 
@@ -144,10 +141,7 @@ class user:
         bronzefruit = 0
         bluebronzesapling = 0
         bluebronzefruit = 0
-        qpss = 0
-        manaprism = 0
         pureprism = 0
-        rm01 = 0
         sqf01 = 0
         holygrail = 0
 
@@ -182,23 +176,8 @@ class user:
                 break
 
         for item in data['cache']['replaced']['userItem']:
-            if item['itemId'] == 1:
-                qpss = item['num']
-                break
-
-        for item in data['cache']['replaced']['userItem']:
-            if item['itemId'] == 3:
-                manaprism = item['num']
-                break
-
-        for item in data['cache']['replaced']['userItem']:
             if item['itemId'] == 46:
                 pureprism = item['num']
-                break
-
-        for item in data['cache']['replaced']['userItem']:
-            if item['itemId'] == 18:
-                rm01 = item['num']
                 break
 
         for item in data['cache']['replaced']['userItem']:
@@ -212,7 +191,7 @@ class user:
                 break
 
         
-        rewards = Rewards(stone, lv, ticket, goldenfruit, silverfruit, bronzefruit, bluebronzesapling, bluebronzefruit, qpss, manaprism, pureprism, rm01, sqf01, holygrail)
+        rewards = Rewards(stone, lv, ticket, goldenfruit, silverfruit, bronzefruit, bluebronzesapling, bluebronzefruit, pureprism, sqf01, holygrail)
 
         DataWebhook.append(rewards)
 
