@@ -85,23 +85,8 @@ def topLogin(data: list) -> None:
                         "inline": True
                     },
                     {
-                        "name": "绿方块",
-                        "value": f"{rewards.manaprism}",
-                        "inline": True
-                    },
-                    {
                         "name": "白方块",
                         "value": f"{rewards.pureprism}",
-                        "inline": True
-                    },
-                    {
-                        "name": "金方块",
-                        "value": f"{rewards.rm01}",
-                        "inline": True
-                    },
-                    {
-                        "name": "QP",
-                        "value": f"{rewards.qpss}",
                         "inline": True
                     },
                     {
