@@ -25,7 +25,7 @@ def topLogin(data: list) -> None:
         "content": None,
         "embeds": [
             {
-                "title": "FGO自动登录系统 - " + main.fate_region,
+                "title": "FGO登录系统 - " + main.fate_region,
                 "description": f"登录成功。列出角色信息.\n\n{messageBonus}",
                 "color": 563455,
                 "fields": [
@@ -35,13 +35,43 @@ def topLogin(data: list) -> None:
                         "inline": True
                     },
                     {
-                        "name": "呼符",
+                        "name": "呼符", 
                         "value": f"{rewards.ticket}",
                         "inline": True
-                    },
+                    },                    
                     {
                         "name": "圣晶石",
                         "value": f"{rewards.stone}",
+                        "inline": True
+                    },
+                    {
+                        "name": "圣晶片",
+                        "value": f"{rewards.sqf01}",
+                        "inline": True
+                    },
+                    {
+                        "name": "金苹果",
+                        "value": f"{rewards.goldenfruit}",
+                        "inline": True
+                    },
+                    {
+                        "name": "银苹果",
+                        "value": f"{rewards.silverfruit}",
+                        "inline": True
+                    },
+                    {
+                        "name": "铜苹果",
+                        "value": f"{rewards.bronzefruit}",
+                        "inline": True
+                    },
+                    {
+                        "name": "蓝苹果",
+                        "value": f"{rewards.bluebronzefruit}",
+                        "inline": True
+                    },
+                    {
+                        "name": "蓝苹果树苗",
+                        "value": f"{rewards.bluebronzesapling}",
                         "inline": True
                     },
                     {
@@ -52,6 +82,26 @@ def topLogin(data: list) -> None:
                     {
                         "name": "累计登录天数",
                         "value": f"{login.total_days}",
+                        "inline": True
+                    },
+                    {
+                        "name": "绿方块",
+                        "value": f"{rewards.manaprism}",
+                        "inline": True
+                    },
+                    {
+                        "name": "白方块",
+                        "value": f"{rewards.pureprism}",
+                        "inline": True
+                    },
+                    {
+                        "name": "金方块",
+                        "value": f"{rewards.rm01}",
+                        "inline": True
+                    },
+                    {
+                        "name": "QP",
+                        "value": f"{rewards.qpss}",
                         "inline": True
                     },
                     {
@@ -68,7 +118,13 @@ def topLogin(data: list) -> None:
                         "name": "当前最大AP",
                         "value": f"{login.act_max}",
                         "inline": True
-                    }
+                    },
+                    {
+                        "name": "圣杯",
+                        "value": f"{rewards.holygrail}",
+                        "inline": True
+                    },
+                    
                 ],
                 "thumbnail": {
                     "url": "https://www.fate-go.jp/manga_fgo/images/commnet_chara01.png"
