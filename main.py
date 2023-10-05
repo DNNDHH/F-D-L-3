@@ -83,6 +83,9 @@ def main():
                     logger.error(ex)
                     
                 try:
+                   time.sleep(2)
+                   instance.topHome()
+                   time.sleep(2)
                    logger.info('开始友情点召唤!')
                    instance.drawFP() 
                    time.sleep(2)
