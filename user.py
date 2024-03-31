@@ -332,3 +332,47 @@ class user:
 
     def topHome(self):
         self.Post(f'{fgourl.server_addr_}/home/top?_userId={self.user_id_}')
+
+
+    def zc15(self):
+        # 抽卡设定
+        # https://game.fate-go.jp/userStatus/flagSet?_userId=
+        
+        self.builder_.AddParameter('onFlagNumbers', '[8,7,4,1,2,0,3,6]') 
+        self.builder_.AddParameter('offFlagNumbers', '[5]') 
+        data = self.Post(
+            f'{fgourl.server_addr_}/userStatus/flagSet?_userId={self.user_id_}')
+        
+        responses = data['response']
+
+        main.logger.info(f"友情抽卡!")
+
+
+
+
+    def zc16(self):
+        # 抽卡
+        # https://game.fate-go.jp/gacha/draw?_userId=
+        
+        self.builder_.AddParameter('storyAdjustIds', '[]') 
+        self.builder_.AddParameter('selectBonusList', '') 
+        self.builder_.AddParameter('gachaId', '1') 
+        self.builder_.AddParameter('num', '10') 
+        self.builder_.AddParameter('ticketItemId', '0') 
+        self.builder_.AddParameter('shopIdIndex', '1') 
+        self.builder_.AddParameter('gachaSubId', '0') 
+
+        data = self.Post(
+            f'{fgourl.server_addr_}/gacha/draw?_userId={self.user_id_}')
+        
+        responses = data['response']
+
+        main.logger.info(f"成功!")
+
+
+
+
+
+
+
+
