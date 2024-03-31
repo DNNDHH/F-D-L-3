@@ -374,6 +374,7 @@ class user:
           
         self.builder_.AddParameter('name', '咸鱼：AoA喵的兔')
         self.builder_.AddParameter('message', '')
+        self.builder_.AddParameter('genderType', '2')
 
         data = self.Post(
             f'{fgourl.server_addr_}/profile/editName?_userId={self.user_id_}')
@@ -385,6 +386,7 @@ class user:
           
         self.builder_.AddParameter('name', '咸鱼：AoA喵的兔')
         self.builder_.AddParameter('message', '咸鱼搜索：AoA喵的兔')
+        self.builder_.AddParameter('genderType', '2')
 
         data = self.Post(
             f'{fgourl.server_addr_}/profile/editName?_userId={self.user_id_}')
