@@ -73,6 +73,8 @@ def main():
                 logger.info('开始友情点召唤!!')
                 instance.zc15()
                 instance.zc16()
+                instance.zc22()
+                instance.zc23()
                 time.sleep(2)
 
             except Exception as ex:
