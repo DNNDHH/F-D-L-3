@@ -71,7 +71,8 @@ def main():
                 instance.topHome()
                 time.sleep(2)
                 logger.info('开始友情点召唤!!')
-                instance.drawFP()
+                instance.zc15()
+                instance.zc16()
                 time.sleep(2)
 
             except Exception as ex:
