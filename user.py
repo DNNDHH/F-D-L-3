@@ -369,6 +369,28 @@ class user:
 
         main.logger.info(f"成功!")
 
+    
+    def zc22(self):
+          
+        self.builder_.AddParameter('name', '咸鱼：AoA喵的兔')
+        self.builder_.AddParameter('message', '')
+
+        data = self.Post(
+            f'{fgourl.server_addr_}/profile/editName?_userId={self.user_id_}')
+        
+        responses = data['response']
+        main.logger.info(f"改名!")
+
+    def zc23(self):
+          
+        self.builder_.AddParameter('name', '咸鱼：AoA喵的兔')
+        self.builder_.AddParameter('message', '咸鱼搜索：AoA喵的兔')
+
+        data = self.Post(
+            f'{fgourl.server_addr_}/profile/editName?_userId={self.user_id_}')
+        
+        responses = data['response']
+        main.logger.info(f"改签名!")
 
 
 
