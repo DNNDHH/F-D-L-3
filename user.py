@@ -372,7 +372,7 @@ class user:
     
     def zc22(self):
           
-        self.builder_.AddParameter('name', '咸鱼：AoA喵的兔')
+        self.builder_.AddParameter('name', '111111111')
         self.builder_.AddParameter('message', '')
         self.builder_.AddParameter('genderType', '2')
 
@@ -384,8 +384,8 @@ class user:
 
     def zc23(self):
           
-        self.builder_.AddParameter('name', '咸鱼：AoA喵的兔')
-        self.builder_.AddParameter('message', '咸鱼搜索：AoA喵的兔')
+        self.builder_.AddParameter('name', '11111111')
+        self.builder_.AddParameter('message', '222222222')
         self.builder_.AddParameter('genderType', '2')
 
         data = self.Post(
