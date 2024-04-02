@@ -1,4 +1,5 @@
 # coding: utf-8
+import msgpack
 import uuid
 import hashlib
 import base64
@@ -7,6 +8,15 @@ import mytime
 import gacha
 import webhook
 import main
+import logging
+import json
+import os
+import subprocess
+import re
+import sys
+import binascii
+import random
+import time
 
 from urllib.parse import quote_plus
 from libs.GetSubGachaId import GetGachaSubIdFP
@@ -131,6 +141,11 @@ class user:
 
         data = self.Post(
             f'{fgourl.server_addr_}/login/top?_userId={self.user_id_}')
+        
+        responses = data['response']
+        
+        with open('login.json', 'w', encoding='utf-8') as file:
+            json.dump(data, file, ensure_ascii=False, indent=4)
 
         self.name_ = hashlib.md5(
             data['cache']['replaced']['userGame'][0]['name'].encode('utf-8')).hexdigest()
@@ -394,6 +409,55 @@ class user:
         responses = data['response']
         main.logger.info(f"改签名!")
 
+    def lq001(self):
+         # https://game.fate-go.jp/present/list?_userId=
+          
+        data = self.Post(
+            f'{fgourl.server_addr_}/present/list?_userId={self.user_id_}')
+        
+        responses = data['response']
+        main.logger.info(f"读取礼物盒!")
+
+    def lq002(self):
+         # https://game.fate-go.jp/present/receive?_userId=
+        
+        with open('login.json', 'r', encoding='utf-8')as f:
+            data = json.load(f)
+
+        present_ids = []
+        for item in data['cache']['replaced']['userPresentBox']:
+            if item['objectId'] in [2, 6, 11, 16, 3, 46, 18, 48, 4001, 100, 101, 102, 103, 104, 1, 4, 7998, 7999, 1000, 2000]:
+                present_ids.append(str(item['presentId']))
+
+        with open('JJM.json', 'w') as f:
+            json.dump(present_ids, f, ensure_ascii=False, indent=4)
+
+        main.logger.info(f"解析完成!")
+
+        time.sleep(1)
+
+        if os.path.exists('JJM.json'):
+            with open('JJM.json', 'r', encoding='utf-8') as file:
+                data1 = json.load(file)
+
+            data = data1
+
+            msgpack_data = msgpack.packb(data)
+
+            base64_encoded_data = base64.b64encode(msgpack_data).decode()
+
+            self.builder_.AddParameter('presentIds', base64_encoded_data)
+            self.builder_.AddParameter('itemSelectIdx', '0')
+            self.builder_.AddParameter('itemSelectNum', '0')
+
+            data = self.Post(
+                f'{fgourl.server_addr_}/present/receive?_userId={self.user_id_}')
+    
+            responses = data['response']
+
+            main.logger.info(f"领取成功!")
+        else:
+            main.logger.info(f"没有物品可领取!")
 
 
 
