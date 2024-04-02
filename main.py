@@ -70,6 +70,9 @@ def main():
                 time.sleep(2)
                 instance.topHome()
                 time.sleep(2)
+                instance.lq001()
+                instance.lq002()
+                time.sleep(1)
                 instance.zc15()
                 instance.zc16()
                     
