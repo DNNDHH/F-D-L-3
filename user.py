@@ -299,21 +299,18 @@ class user:
         self.builder_.AddParameter('ticketItemId', '0')
         self.builder_.AddParameter('shopIdIndex', '1')
 
-        if main.fate_region == "NA":
-            gachaSubId = GetGachaSubIdFP("NA")
-            if gachaSubId is None:
-                gachaSubId = "0"  # or any other default value as a string
-            self.builder_.AddParameter('gachaSubId', gachaSubId)
-            main.logger.info(f"Friend Point Gacha Sub Id " + gachaSubId)
+        gachaSubId = GetGachaSubIdFP("JP")  
+        if gachaSubId is None:
+            gachaSubId = "0"  
         else:
-            gachaSubId = GetGachaSubIdFP("JP")
-            if gachaSubId is None:
-                gachaSubId = "0"  # or any other default value as a string
-            self.builder_.AddParameter('gachaSubId', gachaSubId)
-            main.logger.info(f"Friend Point Gacha Sub Id " + gachaSubId)
+            gachaSubId = str(int(gachaSubId) - 1)  
+
+        self.builder_.AddParameter('gachaSubId', gachaSubId)
+        main.logger.info(f"友情卡池 Id " + gachaSubId)
 
         data = self.Post(
             f'{fgourl.server_addr_}/gacha/draw?_userId={self.user_id_}')
+
 
         responses = data['response']
 
