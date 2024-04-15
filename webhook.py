@@ -30,11 +30,6 @@ def topLogin(data: list) -> None:
                 "color": 563455,
                 "fields": [
                     {
-                        "name": "等级",
-                        "value": f"{rewards.level}",
-                        "inline": True
-                    },
-                    {
                         "name": "呼符", 
                         "value": f"{rewards.ticket}",
                         "inline": True
@@ -42,71 +37,6 @@ def topLogin(data: list) -> None:
                     {
                         "name": "圣晶石",
                         "value": f"{rewards.stone}",
-                        "inline": True
-                    },
-                    {
-                        "name": "圣晶片",
-                        "value": f"{rewards.sqf01}",
-                        "inline": True
-                    },
-                    {
-                        "name": "金苹果",
-                        "value": f"{rewards.goldenfruit}",
-                        "inline": True
-                    },
-                    {
-                        "name": "银苹果",
-                        "value": f"{rewards.silverfruit}",
-                        "inline": True
-                    },
-                    {
-                        "name": "铜苹果",
-                        "value": f"{rewards.bronzefruit}",
-                        "inline": True
-                    },
-                    {
-                        "name": "蓝苹果",
-                        "value": f"{rewards.bluebronzefruit}",
-                        "inline": True
-                    },
-                    {
-                        "name": "蓝苹果树苗",
-                        "value": f"{rewards.bluebronzesapling}",
-                        "inline": True
-                    },
-                    {
-                        "name": "连续登录天数",
-                        "value": f"{login.login_days}",
-                        "inline": True
-                    },
-                    {
-                        "name": "累计登录天数",
-                        "value": f"{login.total_days}",
-                        "inline": True
-                    },
-                    {
-                        "name": "白方块",
-                        "value": f"{rewards.pureprism}",
-                        "inline": True
-                    },
-                    {
-                        "name": "友情点",
-                        "value": f"{login.total_fp}",
-                        "inline": True
-                    },
-                    {
-                        "name": "今天 获得的友情点",
-                        "value": f"+{login.add_fp}",
-                        "inline": True
-                    },
-                    {
-                        "name": "当前最大AP",
-                        "value": f"{login.act_max}",
-                        "inline": True
-                    },
-                    {
-                        "name": "圣杯",
-                        "value": f"{rewards.holygrail}",
                         "inline": True
                     },
                     
