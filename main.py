@@ -74,7 +74,7 @@ def main():
                 instance.lq002()
                 time.sleep(1)
                 instance.zc15()
-                instance.drawFP()
+                instance.drawFP(2)
                     
                     
             except Exception as ex:
