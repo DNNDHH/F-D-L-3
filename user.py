@@ -79,7 +79,7 @@ class ParameterBuilder:
 
 
 class Rewards:
-    def __init__(self, stone, level, ticket, goldenfruit, silverfruit, bronzefruit, bluebronzesapling, bluebronzefruit, pureprism, sqf01, holygrail):
+    def __init__(self, stone, fpids, level, ticket, goldenfruit, silverfruit, bronzefruit, bluebronzesapling, bluebronzefruit, pureprism, sqf01, holygrail):
         self.stone = stone
         self.level = level
         self.ticket = ticket
@@ -91,6 +91,7 @@ class Rewards:
         self.pureprism = pureprism
         self.sqf01 = sqf01
         self.holygrail = holygrail
+        self.fpids = fpids
 
 
 class Login:
