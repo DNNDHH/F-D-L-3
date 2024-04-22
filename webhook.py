@@ -29,6 +29,11 @@ def topLogin(data: list) -> None:
                 "description": f"登录成功。列出角色信息.\n\n{messageBonus}",
                 "color": 563455,
                 "fields": [
+                     {
+                        "name": "ID", 
+                        "value": f"{rewards.fpids}",
+                        "inline": True
+                    }, 
                     {
                         "name": "呼符", 
                         "value": f"{rewards.ticket}",
