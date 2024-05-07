@@ -19,7 +19,8 @@ jobs:
     steps:
       - name: Install Requeriments
         run: |
-          pip install -r Allb.txt
+          pip install -r F-D-L-3/Allb.txt
+
 
       - name: Gettings files from Repo
         uses: actions/checkout@v2
