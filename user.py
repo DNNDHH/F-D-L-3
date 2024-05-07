@@ -48,9 +48,6 @@ class ParameterBuilder:
         with open('idempotency_key.txt', 'w', encoding='utf-8')as file:
             file.write(self.idempotency_key_)
 
-            main.logger.info(f"\n ======================================== \n [+] 生成的UUID : {self.idempotency_key_}\n ======================================== " )
-        
-
     def AddParameter(self, key: str, value: str):
         self.parameter_list_.append((key, value))
 
@@ -140,12 +137,14 @@ class user:
         self.builder_.Clean()
         return res
         
-    def getSignature(self):
+    def SignedData(self):
+
+        idempotency_key_signature = os.environ.get('IDEMPOTENCY_KEY_SIGNATURE_SECRET')
 
         with open("idempotency_key.txt", 'r', encoding='utf-8') as dk_idk:
             idk = dk_idk.read().strip()
-
-        url = f'https://fgo.xiaoheimao.workers.dev/getSignature?userId={self.user_id_}&idempotencyKey={idk}'
+            
+        url = f'{idempotency_key_signature}userId={self.user_id_}&idempotencyKey={idk}'
 
         ua = UserAgent()
         headers = {
@@ -156,10 +155,7 @@ class user:
 
         with open("signature.txt", "w", encoding="utf-8") as file:
             file.write(result)
-
-        main.logger.info(f"\n ======================================== \n [+] 签名数据 : {result}\n ======================================== " )
-
-
+            
     def topLogin(self):
         DataWebhook = []  # This data will be use in discord webhook!
 
