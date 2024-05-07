@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Install Requeriments
         run: |
-          pip install -r F-D-L-3/Allb.txt
+          ls
 
 
       - name: Gettings files from Repo
