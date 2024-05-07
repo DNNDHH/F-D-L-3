@@ -17,9 +17,14 @@ import sys
 import binascii
 import random
 import time
+import requests
+import shutil
+
+
 
 from urllib.parse import quote_plus
 from libs.GetSubGachaId import GetGachaSubIdFP
+from fake_useragent import UserAgent
 
 class ParameterBuilder:
     def __init__(self, uid: str, auth_key: str, secret_key: str):
@@ -27,16 +32,24 @@ class ParameterBuilder:
         self.auth_key_ = auth_key
         self.secret_key_ = secret_key
         self.content_ = ''
+        self.idempotency_key_ = str(uuid.uuid4())  # 生成唯一标识符
         self.parameter_list_ = [
             ('appVer', fgourl.app_ver_),
             ('authKey', self.auth_key_),
             ('dataVer', str(fgourl.data_ver_)),
             ('dateVer', str(fgourl.date_ver_)),
-            ('idempotencyKey', str(uuid.uuid4())),
+            ('idempotencyKey', self.idempotency_key_),  # 使用生成的唯一标识符
             ('lastAccessTime', str(mytime.GetTimeStamp())),
             ('userId', self.uid_),
             ('verCode', fgourl.ver_code_),
         ]
+
+        # 将生成的唯一标识符保存到文件中
+        with open('idempotency_key.txt', 'w', encoding='utf-8')as file:
+            file.write(self.idempotency_key_)
+
+            main.logger.info(f"\n ======================================== \n [+] 生成的UUID : {self.idempotency_key_}\n ======================================== " )
+        
 
     def AddParameter(self, key: str, value: str):
         self.parameter_list_.append((key, value))
@@ -126,9 +139,32 @@ class user:
         res = fgourl.PostReq(self.s_, url, self.builder_.Build())
         self.builder_.Clean()
         return res
+        
+    def getSignature(self):
+
+        with open("idempotency_key.txt", 'r', encoding='utf-8') as dk_idk:
+            idk = dk_idk.read().strip()
+
+        url = f'https://fgo.xiaoheimao.workers.dev/getSignature?userId={self.user_id_}&idempotencyKey={idk}'
+
+        ua = UserAgent()
+        headers = {
+            'User-Agent': ua.random
+        }
+
+        result = requests.get(url, headers=headers, verify=False).text
+
+        with open("signature.txt", "w", encoding="utf-8") as file:
+            file.write(result)
+
+        main.logger.info(f"\n ======================================== \n [+] 签名数据 : {result}\n ======================================== " )
+
 
     def topLogin(self):
         DataWebhook = []  # This data will be use in discord webhook!
+
+        with open("signature.txt", 'r', encoding='utf-8') as dk_ss:
+            value = dk_ss.read().strip()
 
         lastAccessTime = self.builder_.parameter_list_[5][1]
         userState = (-int(lastAccessTime) >>
@@ -136,6 +172,7 @@ class user:
 
         self.builder_.AddParameter(
             'assetbundleFolder', fgourl.asset_bundle_folder_)
+        self.builder_.AddParameter('idempotencyKeySignature', value)
         self.builder_.AddParameter('deviceInfo', 'Google Pixel 5 / Android OS 14 / API-34 (UP1A.231105.001/10817346)')
         self.builder_.AddParameter('isTerminalLogin', '1')
         self.builder_.AddParameter('userState', str(userState))
