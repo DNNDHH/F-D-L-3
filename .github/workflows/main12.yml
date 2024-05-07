@@ -5,8 +5,8 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
- # schedule:
- #   - cron: "07 02 * * *"
+  schedule:
+    - cron: "07 02 * * *"
   workflow_dispatch:
 
 jobs:
@@ -17,12 +17,14 @@ jobs:
         python-version: [3.8]
 
     steps:
-      - name: Install Requeriments
-        run: pip install -r https://raw.githubusercontent.com/DNNDHH/F-D-L/master/requirements.txt
-
+    
       - name: Gettings files from Repo
         uses: actions/checkout@v2
-
+        
+      - name: Install Requeriments
+        run: |
+          pip install -r Allb.txt
+          
       - name: Execute main script 1
         run: |
           python3 main.py
