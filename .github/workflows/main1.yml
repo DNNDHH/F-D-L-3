@@ -23,7 +23,7 @@ jobs:
         
       - name: Install Requeriments
         run: |
-          ls
+          pip install -r Allb.txt
 
       - name: Execute main script 1
         run: |
