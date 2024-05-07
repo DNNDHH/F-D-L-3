@@ -32,19 +32,18 @@ class ParameterBuilder:
         self.auth_key_ = auth_key
         self.secret_key_ = secret_key
         self.content_ = ''
-        self.idempotency_key_ = str(uuid.uuid4())  # 生成唯一标识符
+        self.idempotency_key_ = str(uuid.uuid4())
         self.parameter_list_ = [
             ('appVer', fgourl.app_ver_),
             ('authKey', self.auth_key_),
             ('dataVer', str(fgourl.data_ver_)),
             ('dateVer', str(fgourl.date_ver_)),
-            ('idempotencyKey', self.idempotency_key_),  # 使用生成的唯一标识符
+            ('idempotencyKey', self.idempotency_key_), 
             ('lastAccessTime', str(mytime.GetTimeStamp())),
             ('userId', self.uid_),
             ('verCode', fgourl.ver_code_),
         ]
 
-        # 将生成的唯一标识符保存到文件中
         with open('idempotency_key.txt', 'w', encoding='utf-8')as file:
             file.write(self.idempotency_key_)
 
