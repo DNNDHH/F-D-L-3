@@ -18,14 +18,8 @@ jobs:
 
     steps:
       - name: Install Requeriments
-        run: pip install -r json5
-        run: pip install -r httpx
-        run: pip install -r lxml
-        run: pip install -r requests
-        run: pip install -r py3rijndael
-        run: pip install -r msgpack
-        run: pip install -r coloredlogs
-        run: pip install -r fake-useragent
+       run: |
+          pip install -r Allb.txt
 
       - name: Gettings files from Repo
         uses: actions/checkout@v2
