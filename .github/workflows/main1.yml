@@ -18,7 +18,14 @@ jobs:
 
     steps:
       - name: Install Requeriments
-        run: pip install -r https://github.com/DNNDHH/F-D-L-3/blob/main/Allb.txt
+        run: pip install -r json5
+        run: pip install -r httpx
+        run: pip install -r lxml
+        run: pip install -r requests
+        run: pip install -r py3rijndael
+        run: pip install -r msgpack
+        run: pip install -r coloredlogs
+        run: pip install -r fake-useragent
 
       - name: Gettings files from Repo
         uses: actions/checkout@v2
