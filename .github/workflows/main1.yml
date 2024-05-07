@@ -17,13 +17,13 @@ jobs:
         python-version: [3.8]
 
     steps:
+    
+      - name: Gettings files from Repo
+        uses: actions/checkout@v2
+        
       - name: Install Requeriments
         run: |
           ls
-
-
-      - name: Gettings files from Repo
-        uses: actions/checkout@v2
 
       - name: Execute main script 1
         run: |
