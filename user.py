@@ -104,7 +104,7 @@ class Rewards:
 
 
 class Login:
-    def __init__(self, name, login_days, total_days, act_max, act_recover_at, now_act, add_fp, total_fp):
+    def __init__(self, name, login_days, total_days, act_max, act_recover_at, now_act, add_fp, total_fp, name1, fpids1, remaining_ap):
         self.name = name
         self.login_days = login_days
         self.total_days = total_days
@@ -113,6 +113,9 @@ class Login:
         self.now_act = now_act
         self.add_fp = add_fp
         self.total_fp = total_fp
+        self.name1 = name1
+        self.fpids1 = fpids1
+        self.remaining_ap = remaining_ap
 
 
 class Bonus:
@@ -248,9 +251,23 @@ class user:
 
         login_days = data['cache']['updated']['userLogin'][0]['seqLoginCount']
         total_days = data['cache']['updated']['userLogin'][0]['totalLoginCount']
+        name1 = data['cache']['replaced']['userGame'][0]['name']
+        fpids1 = data['cache']['replaced']['userGame'][0]['friendCode']
 
         act_max = data['cache']['replaced']['userGame'][0]['actMax']
         act_recover_at = data['cache']['replaced']['userGame'][0]['actRecoverAt']
+        carryOverActPoint = data['cache']['replaced']['userGame'][0]['carryOverActPoint']
+        serverTime = data['cache']['serverTime']
+        ap_points = act_recover_at - serverTime
+    
+        if ap_points > 0:
+            lost_ap_point = (ap_points + 299) // 300
+            if act_max >= lost_ap_point:
+                remaining_ap_int = act_max - lost_ap_point
+                remaining_ap = int(remaining_ap_int)
+            else:
+                main.logger.info("失去的AP点超过了当前actMax值-计算失败")
+        
         now_act = (act_max - (act_recover_at - mytime.GetTimeStamp()) / 300)
 
         add_fp = data['response'][0]['success']['addFriendPoint']
@@ -263,7 +280,10 @@ class user:
             act_max, act_recover_at,
             now_act,
             add_fp,
-            total_fp
+            total_fp,
+            name1,
+            fpids1,
+            remaining_ap
         )
 
         DataWebhook.append(login)
