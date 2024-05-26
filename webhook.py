@@ -52,6 +52,11 @@ def topLogin(data: list) -> None:
                         "value": f"{rewards.stone}",
                         "inline": True
                     },
+                    {
+                        "name": "AP",
+                        "value": f"{login.remaining_ap}",
+                        "inline": True
+                    },
                     
                 ],
                 "thumbnail": {
