@@ -319,6 +319,8 @@ class user:
 
 
     def buyBlueApple(self):
+        main.logger.info(f" d ")
+        
         with open('login.json', 'r', encoding='utf-8') as file:
             data = json.load(file)
 
@@ -328,12 +330,14 @@ class user:
             serverTime = data['cache']['serverTime']
             
             bluebronzesapling = 0 
+            
             for item in data['cache']['replaced']['userItem']:
                 if item['itemId'] == 103:
                     bluebronzesapling = item['num']
                     break
                     
             ap_points = actRecoverAt - serverTime
+            
             remaining_ap = 0
             
             if ap_points > 0:
