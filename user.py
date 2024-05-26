@@ -345,14 +345,14 @@ class user:
                    remaining_ap = act_max + carryOverActPoint
                    remaining_ap_int = int(remaining_ap)
                    
-               main.logger.info(remaining_ap)
+               main.logger.info(f" AP {remaining_ap} ")
 
 
                if bluebronzesapling > 0:
                    quantity = remaining_ap_int // 40
                    if quantity == 0:
                        main.logger.info(f"\n ======================================== \n AP低于40，不能购买蓝苹果 \n ======================================== ")
-                       main.logger.info(quantity)
+                       main.logger.info(f" 结果 {quantity} ")
                        return
                        
                    if bluebronzesapling < quantity:
