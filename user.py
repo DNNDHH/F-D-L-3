@@ -342,7 +342,7 @@ class user:
                    remaining_ap = actMax - lost_ap_point
                    remaining_ap_int = int(remaining_ap)
             else:
-                remaining_ap = act_max + carryOverActPoint
+                remaining_ap = actMax + carryOverActPoint
                 remaining_ap_int = int(remaining_ap)
 
             if bluebronzesapling > 0:
