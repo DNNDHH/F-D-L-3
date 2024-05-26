@@ -266,8 +266,9 @@ class user:
             if act_max >= lost_ap_point:
                 remaining_ap_int = act_max - lost_ap_point
                 remaining_ap = int(remaining_ap_int)
-            else:
-                main.logger.info("失去的AP点超过了当前actMax值-计算失败")
+        else:
+            remaining_ap = act_max + carryOverActPoint
+                
         
         now_act = (act_max - (act_recover_at - mytime.GetTimeStamp()) / 300)
 
