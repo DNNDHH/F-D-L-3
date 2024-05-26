@@ -259,7 +259,8 @@ class user:
         carryOverActPoint = data['cache']['replaced']['userGame'][0]['carryOverActPoint']
         serverTime = data['cache']['serverTime']
         ap_points = act_recover_at - serverTime
-    
+        remaining_ap = 0
+        
         if ap_points > 0:
             lost_ap_point = (ap_points + 299) // 300
             if act_max >= lost_ap_point:
