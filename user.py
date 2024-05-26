@@ -319,8 +319,6 @@ class user:
 
 
     def buyBlueApple(self):
-        main.logger.info(f" d ")
-        
         with open('login.json', 'r', encoding='utf-8') as file:
             data = json.load(file)
 
@@ -328,66 +326,60 @@ class user:
             actMax = data['cache']['replaced']['userGame'][0]['actMax']
             carryOverActPoint = data['cache']['replaced']['userGame'][0]['carryOverActPoint']
             serverTime = data['cache']['serverTime']
-            
+        
             bluebronzesapling = 0 
-            
             for item in data['cache']['replaced']['userItem']:
                 if item['itemId'] == 103:
                     bluebronzesapling = item['num']
                     break
-                    
+                
             ap_points = actRecoverAt - serverTime
-            
             remaining_ap = 0
-            
+        
             if ap_points > 0:
                lost_ap_point = (ap_points + 299) // 300
                if actMax >= lost_ap_point:
                    remaining_ap = actMax - lost_ap_point
                    remaining_ap_int = int(remaining_ap)
-               else:
-                   remaining_ap = act_max + carryOverActPoint
-                   remaining_ap_int = int(remaining_ap)
-                   
-               main.logger.info(f" AP {remaining_ap} ")
+            else:
+                remaining_ap = act_max + carryOverActPoint
+                remaining_ap_int = int(remaining_ap)
 
+            if bluebronzesapling > 0:
+                quantity = remaining_ap_int // 40
+                if quantity == 0:
+                    main.logger.info(f"\n ======================================== \n APが40未満の場合は購入できません (´･ω･`)? \n ======================================== ")
+                    return
+                
+                if bluebronzesapling < quantity:
+                    num_to_purchase = bluebronzesapling
+                else:
+                    num_to_purchase = quantity
 
-               if bluebronzesapling > 0:
-                   quantity = remaining_ap_int // 40
-                   if quantity == 0:
-                       main.logger.info(f"\n ======================================== \n AP低于40，不能购买蓝苹果 \n ======================================== ")
-                       main.logger.info(f" 结果 {quantity} ")
-                       return
-                       
-                   if bluebronzesapling < quantity:
-                       num_to_purchase = bluebronzesapling
-                   else:
-                       num_to_purchase = quantity
+                self.builder_.AddParameter('id', '13000000')
+                self.builder_.AddParameter('num', str(num_to_purchase))
 
-                   self.builder_.AddParameter('id', '13000000')
-                   self.builder_.AddParameter('num', str(num_to_purchase))
+                data = self.Post(f'{fgourl.server_addr_}/shop/purchase?_userId={self.user_id_}')
+                responses = data['response']
 
-                   data = self.Post(f'{fgourl.server_addr_}/shop/purchase?_userId={self.user_id_}')
-                   responses = data['response']
+                for response in responses:
+                    resCode = response['resCode']
+                    resSuccess = response['success']
+                    nid = response["nid"]
 
-                   for response in responses:
-                       resCode = response['resCode']
-                       resSuccess = response['success']
-                       nid = response["nid"]
+                    if (resCode != "00"):
+                        continue
 
-                       if (resCode != "00"):
-                           continue
+                    if nid == "purchase":
+                        if "purchaseName" in resSuccess and "purchaseNum" in resSuccess:
+                            purchaseName = resSuccess['purchaseName']
+                            purchaseNum = resSuccess['purchaseNum']
 
-                       if nid == "purchase":
-                           if "purchaseName" in resSuccess and "purchaseNum" in resSuccess:
-                               purchaseName = resSuccess['purchaseName']
-                               purchaseNum = resSuccess['purchaseNum']
+                            main.logger.info(f"\n========================================\n[+] {purchaseNum}x {purchaseName} 购买成功\n========================================")
+                            webhook.shop(purchaseName, purchaseNum)
+            else:
+                main.logger.info(f"\n ======================================== \n ＞︿＜ 青銅の苗木が足りないヽ (*。>Д<)o゜ \n ======================================== " )
 
-                               main.logger.info(f"\n========================================\n[+] {purchaseNum}x {purchaseName} 购买成功\n========================================")
-                               webhook.shop(purchaseName, purchaseNum)
-               else:
-                   main.logger.info(f"\n ======================================== \n ＞︿＜ 青銅の苗木が足りないヽ (*。>Д<)o゜ \n ======================================== " )
-    
 
     def drawFP(self):
         self.builder_.AddParameter('storyAdjustIds', '[]')
