@@ -20,11 +20,12 @@ import time
 import requests
 import shutil
 
-
-
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import hashes
 from urllib.parse import quote_plus
 from libs.GetSubGachaId import GetGachaSubIdFP
-from fake_useragent import UserAgent
 
 class ParameterBuilder:
     def __init__(self, uid: str, auth_key: str, secret_key: str):
@@ -32,7 +33,7 @@ class ParameterBuilder:
         self.auth_key_ = auth_key
         self.secret_key_ = secret_key
         self.content_ = ''
-        self.idempotency_key_ = str(uuid.uuid4())
+        self.idempotency_key_ = str(uuid.uuid4()) 
         self.parameter_list_ = [
             ('appVer', fgourl.app_ver_),
             ('authKey', self.auth_key_),
@@ -44,8 +45,8 @@ class ParameterBuilder:
             ('verCode', fgourl.ver_code_),
         ]
 
-        with open('idempotency_key.txt', 'w', encoding='utf-8')as file:
-            file.write(self.idempotency_key_)
+    def get_idempotency_key(self):
+        return self.idempotency_key_
 
     def AddParameter(self, key: str, value: str):
         self.parameter_list_.append((key, value))
@@ -139,38 +140,35 @@ class user:
         self.builder_.Clean()
         return res
         
-    def SignedData(self):
-
-        idempotency_key_signature = os.environ.get('IDEMPOTENCY_KEY_SIGNATURE_SECRET')
-
-        with open("idempotency_key.txt", 'r', encoding='utf-8') as dk_idk:
-            idk = dk_idk.read().strip()
-            
-        url = f'{idempotency_key_signature}userId={self.user_id_}&idempotencyKey={idk}'
-
-        ua = UserAgent()
-        headers = {
-            'User-Agent': ua.random
-        }
-
-        result = requests.get(url, headers=headers, verify=False).text
-
-        with open("signature.txt", "w", encoding="utf-8") as file:
-            file.write(result)
             
     def topLogin(self):
         DataWebhook = []  # This data will be use in discord webhook!
 
-        with open("signature.txt", 'r', encoding='utf-8') as dk_ss:
-            value = dk_ss.read().strip()
-
+        with open('private_key.pem', 'rb') as f:
+            loaded_private_key = serialization.load_pem_private_key(
+                f.read(), password=None, backend=default_backend())
+            
+        def sign(uuid):
+            signature = loaded_private_key.sign(
+                bytes(uuid, 'utf-8'),
+                padding.PKCS1v15(),
+                hashes.SHA256()
+            )
+            return base64.b64encode(signature).decode('utf-8')
+            
+        userid = self.user_id_
+        idk = self.builder_.get_idempotency_key()
+        input_string = f"{userid}{idk}"
+        idempotencyKeySignature = sign(input_string)
+        
         lastAccessTime = self.builder_.parameter_list_[5][1]
+        
         userState = (-int(lastAccessTime) >>
                      2) ^ self.user_id_ & fgourl.data_server_folder_crc_
 
         self.builder_.AddParameter(
             'assetbundleFolder', fgourl.asset_bundle_folder_)
-        self.builder_.AddParameter('idempotencyKeySignature', value)
+        self.builder_.AddParameter('idempotencyKeySignature', idempotencyKeySignature)
         self.builder_.AddParameter('deviceInfo', 'Google Pixel 5 / Android OS 14 / API-34 (UP1A.231105.001/10817346)')
         self.builder_.AddParameter('isTerminalLogin', '1')
         self.builder_.AddParameter('userState', str(userState))
