@@ -546,6 +546,160 @@ class user:
         else:
             main.logger.info(f"没有物品可领取!")
 
+    def lq003(self):
+        # https://game.fate-go.jp/shop/purchase?
+
+        url = 'https://git.atlasacademy.io/atlasacademy/fgo-game-data/raw/branch/JP/master/mstShop.json'
+        response = requests.get(url)
+
+        fdata = response.json()
+        max_base_shop_id = None
+        max_base_shop_s_id = None
+        num = None
+
+
+        for item in fdata:
+            if 4001 in item.get('targetIds', []) and item.get('flag') == 4096:
+                base_shop_id = item.get('baseShopId')
+                if max_base_shop_id is None or base_shop_id > max_base_shop_id:
+                    max_base_shop_id = base_shop_id
+
+        if max_base_shop_id is not None:
+            shopId = max_base_shop_id
+
+            with open('login.json', 'r', encoding='utf-8') as file:
+                gdata = json.load(file)
+
+            num_value = None
+
+            for item in gdata.get('cache', {}).get('updated', {}).get('userShop', []):
+                if item.get('shopId') == shopId:
+                    num_value = item.get('num')
+                    break
+
+            if num_value is not None:
+                shopId = max_base_shop_id
+                num_ok = 5 - num_value
+                if num_ok == 0:
+                   main.logger.info(f"\n ======================================== \n 每月呼符 你已经兑换过了(´･ω･`) \n ======================================== ")
+                else:
+                    mana = gdata['cache']['replaced']['userGame'][0]['mana']
+                    mana_s = mana // 20
+                    if mana_s == 0:
+                       main.logger.info(f"\n ======================================== \n 魔力方块不足(´･ω･`) \n ======================================== ")
+                    else:
+                        if num_ok > mana_s:
+                           num = mana_s
+                        else:
+                           num = num_ok
+
+                        self.builder_.AddParameter('id', str(shopId))
+                        self.builder_.AddParameter('num', str(num))
+
+                        data = self.Post(
+                            f'{fgourl.server_addr_}/shop/purchase?_userId={self.user_id_}')
+                
+                        responses = data['response'] 
+                        if num is not None:
+                           main.logger.info(f"\n ======================================== \n 已兑换 {num} 呼符 （每月）\n ======================================== ")       
+            else:
+                num_ok = 5
+                mana = gdata['cache']['replaced']['userGame'][0]['mana']
+                mana_s = mana // 20
+                if mana_s == 0:
+                   main.logger.info(f"\n ======================================== \n 魔力方块不足(´･ω･`) \n ======================================== ")
+                else:
+                    if num_ok > mana_s:
+                       num = mana_s
+                    else:
+                       num = num_ok
+
+                    self.builder_.AddParameter('id', str(shopId))
+                    self.builder_.AddParameter('num', str(num))
+
+                    data = self.Post(
+                        f'{fgourl.server_addr_}/shop/purchase?_userId={self.user_id_}') 
+                    
+                    if num is not None:
+                       main.logger.info(f"\n ======================================== \n 已兑换 {num} 呼符 （每月） \n ======================================== ")
+
+        for item in fdata:
+            if 4001 in item.get('targetIds', []) and item.get('flag') == 2048:
+                base_shop_s_id = item.get('baseShopId')
+                if max_base_shop_s_id is None or base_shop_s_id > max_base_shop_s_id:
+                    max_base_shop_s_id = base_shop_s_id
+
+        if max_base_shop_s_id is not None:
+            shopId = max_base_shop_s_id
+
+
+            for item in fdata:
+                if item.get('baseShopId') == max_base_shop_s_id:
+                    closedAt = item.get('closedAt')
+
+                    response = requests.get("http://worldtimeapi.org/api/timezone/Etc/UTC")
+                    if response.status_code == 200:
+                        current_time = response.json()['unixtime']
+
+                        if current_time > closedAt:
+                            main.logger.info(f"\n ======================================== \n 目前没有 绿方块活动(´･ω･`) \n ======================================== ")
+                            return
+                        else:
+                            with open('login.json', 'r', encoding='utf-8') as file:
+                                 gdata = json.load(file)
+
+                            mana = gdata['cache']['replaced']['userGame'][0]['mana']
+                            mana_s = mana // 20
+                            num_value = None
+
+                            for item in gdata.get('cache', {}).get('updated', {}).get('userShop', []):
+                                if item.get('shopId') == shopId:
+                                    num_value = item.get('num')
+                                    break
+
+                            if num_value is not None:
+                               num_ok = 5 - num_value
+                               if num_ok == 0:
+                                   main.logger.info(f"\n ======================================== \n 活动呼符 你已经兑换过了(´･ω･`) \n ======================================== ")
+                                   return
+                               else:
+                                    if mana_s == 0:
+                                       main.logger.info(f"\n ======================================== \n 魔力方块不足(´･ω･`) \n ======================================== ")
+                                    else:
+                                        if num_ok > mana_s:
+                                           num = mana_s
+                                        else:
+                                           num = num_ok
+
+                                    self.builder_.AddParameter('id', str(shopId))
+                                    self.builder_.AddParameter('num', str(num))
+
+                                    data = self.Post(
+                                        f'{fgourl.server_addr_}/shop/purchase?_userId={self.user_id_}') 
+                                    if num is not None:
+                                       main.logger.info(f"\n ======================================== \n 已兑换 {num} 呼符 （限时活动）\n ======================================== ")
+                            else:
+                                 num_ok = 5
+                                 mana = gdata['cache']['replaced']['userGame'][0]['mana']
+                                 mana_s = mana // 20
+                                 if mana_s == 0:
+                                    main.logger.info(f"\n ======================================== \n 魔力方块不足(´･ω･`) \n ======================================== ")
+                                    return
+                                 else:
+                                     if num_ok > mana_s:
+                                        num = mana_s
+                                     else:
+                                         num = num_ok
+                 
+                                     self.builder_.AddParameter('id', str(shopId))
+                                     self.builder_.AddParameter('num', str(num))
+
+                                     data = self.Post(
+                                         f'{fgourl.server_addr_}/shop/purchase?_userId={self.user_id_}') 
+                                     if num is not None:
+                                        main.logger.info(f"\n ======================================== \n 已兑换 {num} 呼符 （限时活动） \n ======================================== ")
+                    else:
+                        main.logger.info(f"时间服务器连接失败")
 
 
 
