@@ -29,9 +29,9 @@ jobs:
         run: |
           python3 main.py
         env:
-          userIds: ${{ secrets.GAME_USERIDS_13 }}
-          authKeys: ${{ secrets.GAME_AUTHKEYS_13 }}
-          secretKeys: ${{ secrets.GAME_SECRETKEYS_13 }}
+          userIds: ${{ secrets.GAME_USERIDS_14 }}
+          authKeys: ${{ secrets.GAME_AUTHKEYS_14 }}
+          secretKeys: ${{ secrets.GAME_SECRETKEYS_14 }}
           UserAgent: ${{ secrets.GAME_USERAGENT }}
           fateRegion: ${{ secrets.GAME_REGION }}
           webhookDiscord: ${{ secrets.DISCORD_WEBHOOK_6 }}
