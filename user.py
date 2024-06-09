@@ -455,7 +455,7 @@ class user:
         self.builder_.AddParameter('num', '10') 
         self.builder_.AddParameter('ticketItemId', '0') 
         self.builder_.AddParameter('shopIdIndex', '1') 
-        self.builder_.AddParameter('gachaSubId', '404') 
+        self.builder_.AddParameter('gachaSubId', '406') 
 
         data = self.Post(
             f'{fgourl.server_addr_}/gacha/draw?_userId={self.user_id_}')
