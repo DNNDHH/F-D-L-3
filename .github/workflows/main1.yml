@@ -36,5 +36,21 @@ jobs:
           fateRegion: ${{ secrets.GAME_REGION }}
           webhookDiscord: ${{ secrets.DISCORD_WEBHOOK }}
           IDEMPOTENCY_KEY_SIGNATURE_SECRET: ${{ secrets.IDEMPOTENCY_KEY_SIGNATURE_SECRET }}
+          
+      - name: 查找生成的文件夹
+        id: find_folders
+        run: |
+          find . -type d -name "ID_*" -exec zip -r generated_folders.zip {} +
 
+      - name: 检查工件是否存在
+        id: check_artifact
+        run: test -f generated_folders.zip
+        continue-on-error: true
+
+      - name: 上传工件
+        if: steps.check_artifact.outcome == 'success'
+        uses: actions/upload-artifact@v2
+        with:
+          name: 注册文件
+          path: generated_folders.zip
  
