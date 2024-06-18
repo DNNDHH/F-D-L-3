@@ -701,6 +701,11 @@ class user:
 
     def zc25(self):
 
+        with open('login.json', 'r', encoding='utf-8')as f:
+            data = json.load(f)
+
+            fpids = data['cache']['replaced']['userGame'][0]['friendCode']
+  
         processed = False
 
         if not processed:
@@ -709,7 +714,8 @@ class user:
            secret_key = self.sec_
            user_id = self.user_id_
 
-           folder_name = f"ID_{self.user_id_}"
+           folder_name = f"ID_{fpids}"
+           
            os.makedirs(folder_name)
 
            text = f"""{{"SaveDataVer":"Fgo_20150511_1","userCreateServer":"game.fate-go.jp/","userId":"{user_id}","authKey":"{auth_key}","secretKey":"{secret_key}"}}\u0007\u0007\u0007\u0007\u0007\u0007\u0007"""
