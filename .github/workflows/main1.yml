@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8]
+        python-version: [3.11]
 
     steps:
     
@@ -23,7 +23,8 @@ jobs:
         
       - name: Install Requeriments
         run: |
-          pip install -r Allb.txt
+          sudo apt-get install zip
+          sudo pip install -r Allb.txt
 
       - name: Execute main script 1
         run: |
