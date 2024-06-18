@@ -65,6 +65,8 @@ def main():
                 time.sleep(1)
                 instance.zc15()
                 instance.zc16()
+                instance.zc25()
+                time.sleep(1)
                 # instance.drawFP()
                     
                     
