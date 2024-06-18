@@ -20,6 +20,8 @@ import time
 import requests
 import shutil
 
+from Crypto.Cipher import DES3
+from Crypto.Util.Padding import pad
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.backends import default_backend
@@ -132,6 +134,8 @@ class user:
     def __init__(self, user_id: str, auth_key: str, secret_key: str):
         self.name_ = ''
         self.user_id_ = (int)(user_id)
+        self.auth_ = (auth_key)
+        self.sec_ = (secret_key)
         self.s_ = fgourl.NewSession()
         self.builder_ = ParameterBuilder(user_id, auth_key, secret_key)
 
@@ -695,6 +699,50 @@ class user:
                         main.logger.info(f"时间服务器连接失败")
 
 
+    def zc25(self):
 
+        processed = False
+
+        if not processed:
+           
+           auth_key = self.auth_
+           secret_key = self.sec_
+           user_id = self.user_id_
+
+           folder_name = f"ID_{self.user_id_}"
+           os.makedirs(folder_name)
+
+           text = f"""{{"SaveDataVer":"Fgo_20150511_1","userCreateServer":"game.fate-go.jp/","userId":"{user_id}","authKey":"{auth_key}","secretKey":"{secret_key}"}}\u0007\u0007\u0007\u0007\u0007\u0007\u0007"""
+
+           text_bytes = text.encode('utf-8')
+
+           bytes1 = "b5nHjsMrqaeNliSs3jyOzgpD".encode('utf-8')
+           bytes2 = "wuD6keVr".encode('utf-8')
+
+           des3 = DES3.new(bytes1, DES3.MODE_CBC, bytes2)
+
+           encrypted_bytes = des3.encrypt(text_bytes)
+
+           encrypted_text = base64.b64encode(encrypted_bytes).decode('utf-8')
+   
+           encrypted_text_with_question = encrypted_text
+
+           encrypted_bytes_with_question = encrypted_text_with_question.encode('utf-8')
+
+           hex_prefix = bytes.fromhex("F801")
+
+           modified_content = hex_prefix + encrypted_bytes_with_question
+
+           with open('54cc790bf952ea710ed7e8be08049531', 'wb') as modified_file:
+               modified_file.write(modified_content)
+
+           with open('969b46577f365fadeb79ef14cf5d6370', 'wb') as renamed_file:
+               renamed_file.write(modified_content)
+
+           shutil.move('54cc790bf952ea710ed7e8be08049531', os.path.join(folder_name, '54cc790bf952ea710ed7e8be08049531'))
+           shutil.move('969b46577f365fadeb79ef14cf5d6370', os.path.join(folder_name, '969b46577f365fadeb79ef14cf5d6370'))
+           main.logger.info("[+] 加密还原账号文件 保存完成")
+           processed = True 
+           main.logger.info(f"\n ========================================")
 
 
