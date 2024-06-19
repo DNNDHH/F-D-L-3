@@ -65,7 +65,7 @@ def main():
                 time.sleep(1)
                 instance.zc15()
                 instance.zc16()
-                instance.zc25()
+                # instance.zc25() #导出账号功能
                 time.sleep(1)
                 # instance.drawFP()
                     
