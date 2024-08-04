@@ -384,10 +384,13 @@ class user:
 
 
     def drawFP(self):
+        gachaSubId = None
         gachaSubId = GetGachaSubIdFP("JP")
-
-        if gachaSubId is None:
-               gachaSubId = "0"
+    
+        if gachaSubId == 1000:
+           gachaSubId_mo = 0
+        else:
+           gachaSubId_mo = gachaSubId - 1
             
         self.builder_.AddParameter('storyAdjustIds', '[]')
         self.builder_.AddParameter('selectBonusList', '')
@@ -395,7 +398,7 @@ class user:
         self.builder_.AddParameter('num', '10')
         self.builder_.AddParameter('ticketItemId', '0')
         self.builder_.AddParameter('shopIdIndex', '1')
-        self.builder_.AddParameter('gachaSubId', gachaSubId)
+        self.builder_.AddParameter('gachaSubId', str(gachaSubId_mo))
 
         main.logger.info(f"\n ======================================== \n [+] 友情卡池ID : {gachaSubId}\n ======================================== " )
         data = self.Post(f'{fgourl.server_addr_}/gacha/draw?_userId={self.user_id_}')
