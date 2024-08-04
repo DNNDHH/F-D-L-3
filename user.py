@@ -385,6 +385,7 @@ class user:
 
     def drawFP(self):
         gachaSubId = None
+        
         gachaSubId = GetGachaSubIdFP("JP")
     
         if gachaSubId == 1000:
@@ -400,7 +401,7 @@ class user:
         self.builder_.AddParameter('shopIdIndex', '1')
         self.builder_.AddParameter('gachaSubId', str(gachaSubId_mo))
 
-        main.logger.info(f"\n ======================================== \n [+] 友情卡池ID : {gachaSubId}\n ======================================== " )
+        main.logger.info(f"\n ======================================== \n [+] 友情卡池ID : {gachaSubId_mo}\n ======================================== " )
         data = self.Post(f'{fgourl.server_addr_}/gacha/draw?_userId={self.user_id_}')
         responses = data['response']
 
