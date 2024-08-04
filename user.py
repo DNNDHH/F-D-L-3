@@ -560,6 +560,7 @@ class user:
         max_base_lim_it_s_Num = None 
         max_base_prices = None
         max_base_prices_s = None
+        max_base_name_s = '活动'
         num = None
 
         for item in fdata:
@@ -637,11 +638,15 @@ class user:
                 base_shop_s_id = item.get('baseShopId')
                 base_lim_it_s_Num = item.get('limitNum')
                 base_prices_s = item.get('prices')[0]
+                base_name_s = item.get('detail')
+                match = re.search(r'【(.*?)】', base_name_s)
+                base_name_ss = match.group(1)
                 
                 if max_base_shop_s_id is None or base_shop_s_id > max_base_shop_s_id:
                     max_base_shop_s_id = base_shop_s_id
                     max_base_lim_it_s_Num = base_lim_it_s_Num
                     max_base_prices_s = base_prices_s
+                    max_base_name_s = base_name_ss
 
         if max_base_shop_s_id is not None:
             shopId = max_base_shop_s_id
@@ -673,7 +678,7 @@ class user:
                             if num_value is not None:
                                num_ok = max_base_lim_it_s_Num - num_value
                                if num_ok == 0:
-                                   main.logger.info(f"\n ======================================== \n 活动呼符 你已经兑换过了(´･ω･`) \n ======================================== ")
+                                   main.logger.info(f"\n ======================================== \n {max_base_name_s}呼符 你已经兑换过了(´･ω･`) \n ======================================== ")
                                    return
                                else:
                                     if mana_s == 0:
@@ -690,7 +695,7 @@ class user:
                                     data = self.Post(
                                         f'{fgourl.server_addr_}/shop/purchase?_userId={self.user_id_}') 
                                     if num is not None:
-                                       main.logger.info(f"\n ======================================== \n 已兑换 {num} 呼符 （限时活动）\n ======================================== ")
+                                       main.logger.info(f"\n ======================================== \n 已兑换 {num} 呼符 // {max_base_name_s} \n ======================================== ")
                             else:
                                  num_ok = max_base_lim_it_s_Num
                                  mana = gdata['cache']['replaced']['userGame'][0]['mana']
@@ -711,7 +716,7 @@ class user:
                                      data = self.Post(
                                          f'{fgourl.server_addr_}/shop/purchase?_userId={self.user_id_}') 
                                      if num is not None:
-                                        main.logger.info(f"\n ======================================== \n 已兑换 {num} 呼符 （限时活动） \n ======================================== ")
+                                        main.logger.info(f"\n ======================================== \n 已兑换 {num} 呼符 // {max_base_name_s} \n ======================================== ")
                     else:
                         main.logger.info(f"时间服务器连接失败")
 
