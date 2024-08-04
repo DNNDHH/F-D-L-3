@@ -557,7 +557,9 @@ class user:
         max_base_shop_id = None
         max_base_shop_s_id = None
         max_base_lim_it_Num = None 
+        max_base_lim_it_s_Num = None 
         max_base_prices = None
+        max_base_prices_s = None
         num = None
 
         for item in fdata:
@@ -633,13 +635,13 @@ class user:
         for item in fdata:
             if 4001 in item.get('targetIds', []) and item.get('flag') == 2048:
                 base_shop_s_id = item.get('baseShopId')
-                base_lim_it_Num = item.get('limitNum')
-                base_prices = item.get('prices')[0]
+                base_lim_it_s_Num = item.get('limitNum')
+                base_prices_s = item.get('prices')[0]
                 
                 if max_base_shop_s_id is None or base_shop_s_id > max_base_shop_s_id:
                     max_base_shop_s_id = base_shop_s_id
-                    max_base_lim_it_Num = base_lim_it_Num
-                    max_base_prices = base_prices
+                    max_base_lim_it_s_Num = base_lim_it_s_Num
+                    max_base_prices_s = base_prices_s
 
         if max_base_shop_s_id is not None:
             shopId = max_base_shop_s_id
@@ -660,7 +662,7 @@ class user:
                                  gdata = json.load(file)
 
                             mana = gdata['cache']['replaced']['userGame'][0]['mana']
-                            mana_s = mana // max_base_prices
+                            mana_s = mana // max_base_prices_s
                             num_value = None
 
                             for item in gdata.get('cache', {}).get('updated', {}).get('userShop', []):
@@ -669,7 +671,7 @@ class user:
                                     break
 
                             if num_value is not None:
-                               num_ok = max_base_lim_it_Num - num_value
+                               num_ok = max_base_lim_it_s_Num - num_value
                                if num_ok == 0:
                                    main.logger.info(f"\n ======================================== \n 活动呼符 你已经兑换过了(´･ω･`) \n ======================================== ")
                                    return
@@ -690,10 +692,10 @@ class user:
                                     if num is not None:
                                        main.logger.info(f"\n ======================================== \n 已兑换 {num} 呼符 （限时活动）\n ======================================== ")
                             else:
-                                 num_ok = max_base_lim_it_Num
+                                 num_ok = max_base_lim_it_s_Num
                                  mana = gdata['cache']['replaced']['userGame'][0]['mana']
-                                 mana_s = mana // max_base_prices
-                                 main.logger.info(f" {mana_s} ")
+                                 mana_s = mana // max_base_prices_s
+                                
                                  if mana_s == 0:
                                     main.logger.info(f"\n ======================================== \n 魔力棱镜不足(´･ω･`) \n ======================================== ")
                                     return
