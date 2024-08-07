@@ -722,6 +722,10 @@ class user:
 
 
     def zc25(self):
+        
+        #导出账号功能，在main中引用函数后将还原并导出账号文件到每个工作流程中的工件之中，以zip形式提供下载！
+    
+        #注意！！不要在公开的github存储库上直接使用它，这会直接暴露你的账号文件！
 
         with open('login.json', 'r', encoding='utf-8')as f:
             data = json.load(f)
@@ -741,6 +745,10 @@ class user:
            os.makedirs(folder_name)
 
            text = f"""{{"SaveDataVer":"Fgo_20150511_1","userCreateServer":"game.fate-go.jp/","userId":"{user_id}","authKey":"{auth_key}","secretKey":"{secret_key}"}}\u0007\u0007\u0007\u0007\u0007\u0007\u0007"""
+            
+          #2018年之前的账号使用下面这个转码格式
+          #text = f"""{{"SaveDataVer":"Fgo_20150511_1","userCreateServer":"game.fate-go.jp/","userId":"{userId}","authKey":"{authKey}","secretKey":"{secretKey}"}}\b\b\b\b\b\b\b\b"""
+        
 
            text_bytes = text.encode('utf-8')
 
