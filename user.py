@@ -747,7 +747,7 @@ class user:
            text = f"""{{"SaveDataVer":"Fgo_20150511_1","userCreateServer":"game.fate-go.jp/","userId":"{user_id}","authKey":"{auth_key}","secretKey":"{secret_key}"}}\u0007\u0007\u0007\u0007\u0007\u0007\u0007"""
             
           #2018年之前的账号使用下面这个转码格式
-          #text = f"""{{"SaveDataVer":"Fgo_20150511_1","userCreateServer":"game.fate-go.jp/","userId":"{userId}","authKey":"{authKey}","secretKey":"{secretKey}"}}\b\b\b\b\b\b\b\b"""
+          #text = f"""{{"SaveDataVer":"Fgo_20150511_1","userCreateServer":"game.fate-go.jp/","userId":"{user_id}","authKey":"{auth_key}","secretKey":"{secret_key}"}}\b\b\b\b\b\b\b\b"""
         
 
            text_bytes = text.encode('utf-8')
