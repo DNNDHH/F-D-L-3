@@ -435,6 +435,7 @@ class user:
 
     def drawS(self):
         # 石头卡池
+        #謎の代行者C.I.E.L
         
         self.builder_.AddParameter('storyAdjustIds', '[]')
         self.builder_.AddParameter('selectBonusList', '')
@@ -447,6 +448,7 @@ class user:
         data = self.Post(f'{fgourl.server_addr_}/gacha/draw?_userId={self.user_id_}')
 
         responses = data['response']
+        main.logger.info(f"[+] 圣晶石 抽卡成功" )
     
     def topHome(self):
         self.Post(f'{fgourl.server_addr_}/home/top?_userId={self.user_id_}')
