@@ -77,7 +77,7 @@ def main():
                 time.sleep(1)
                 #instance.drawFP()
                 for _ in range(100): 
-                      instance.drawS()
+                      #instance.drawS()
                       instance.drawFF()
                       time.sleep(1)
                     
