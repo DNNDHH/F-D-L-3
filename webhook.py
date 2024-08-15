@@ -15,6 +15,7 @@ def topLogin(data: list) -> None:
         data22 = json.load(f)
         
         fpids1 = data22['cache']['replaced']['userGame'][0]['friendCode']
+        Svtcount = sum(1 for item in data22['cache']['replaced']['userSvt'] if item.get('svtId') == 2300900) # 謎の代行者C.I.E.L
 
     
 
@@ -55,6 +56,11 @@ def topLogin(data: list) -> None:
                     {
                         "name": "AP",
                         "value": f"{login.remaining_ap}",
+                        "inline": True
+                    },
+                    {
+                        "name": "謎の代行者C.I.E.L",
+                        "value": f"{Svtcount}",
                         "inline": True
                     },
                     
