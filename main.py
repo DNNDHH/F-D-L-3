@@ -63,19 +63,19 @@ def main():
                 time.sleep(2)
                 instance.topHome()
                 time.sleep(2)
-                #instance.buyBlueApple()
-                #instance.lq001()
-                #instance.lq002()
-                #time.sleep(1)
-                #instance.lq003()
-                #time.sleep(1)
-                #instance.zc15()
+                instance.buyBlueApple()
+                instance.lq001()
+                instance.lq002()
+                time.sleep(1)
+                instance.lq003()
+                time.sleep(1)
+                instance.zc15()
                 
                 #instance.zc16()
                 #instance.zc25() #导出账号功能
                 
-                #time.sleep(1)
-                #instance.drawFP()
+                time.sleep(1)
+                instance.drawFP()
                 #for _ in range(100): 
                       #instance.drawS()
                       #instance.drawFF()
