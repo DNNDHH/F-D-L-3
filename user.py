@@ -433,6 +433,21 @@ class user:
 
         webhook.drawFP(servantArray, missionArray)
 
+    def drawS(self):
+        # 石头卡池
+        
+        self.builder_.AddParameter('storyAdjustIds', '[]')
+        self.builder_.AddParameter('selectBonusList', '')
+        self.builder_.AddParameter('gachaId', "50024371")
+        self.builder_.AddParameter('num', '11')
+        self.builder_.AddParameter('ticketItemId', '0')
+        self.builder_.AddParameter('shopIdIndex', '2')
+        self.builder_.AddParameter('gachaSubId', '0')
+
+        data = self.Post(f'{fgourl.server_addr_}/gacha/draw?_userId={self.user_id_}')
+
+        responses = data['response']
+    
     def topHome(self):
         self.Post(f'{fgourl.server_addr_}/home/top?_userId={self.user_id_}')
 
