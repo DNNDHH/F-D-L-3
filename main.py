@@ -73,7 +73,7 @@ def main():
                 #instance.zc16()
                 #instance.zc25() #导出账号功能
                 time.sleep(1)
-                instance.drawFP()
+                #instance.drawFP()
                 for _ in range(50): 
                       instance.drawS()
                       time.sleep(1)
