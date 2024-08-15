@@ -457,7 +457,7 @@ class user:
         self.builder_.AddParameter('storyAdjustIds', '[]')
         self.builder_.AddParameter('selectBonusList', '')
         self.builder_.AddParameter('gachaId', "50024371")
-        self.builder_.AddParameter('num', '11')
+        self.builder_.AddParameter('num', '1')
         self.builder_.AddParameter('ticketItemId', '4001')
         self.builder_.AddParameter('shopIdIndex', '2')
         self.builder_.AddParameter('gachaSubId', '0')
