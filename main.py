@@ -74,12 +74,12 @@ def main():
                 #instance.zc16()
                 #instance.zc25() #导出账号功能
                 
-                time.sleep(1)
+                #time.sleep(1)
                 #instance.drawFP()
-                for _ in range(100): 
+                #for _ in range(100): 
                       #instance.drawS()
-                      instance.drawFF()
-                      time.sleep(1)
+                      #instance.drawFF()
+                      #time.sleep(1)
                     
             except Exception as ex:
                 logger.error(ex)
