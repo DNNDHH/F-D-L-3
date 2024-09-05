@@ -50,7 +50,7 @@ jobs:
 
       - name: 上传工件
         if: steps.check_artifact.outcome == 'success'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: 账号文件
           path: generated_folders.zip
