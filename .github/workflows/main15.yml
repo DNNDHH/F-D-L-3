@@ -19,7 +19,7 @@ jobs:
     steps:
     
       - name: Gettings files from Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         
       - name: Install Requeriments
         run: |
