@@ -387,7 +387,10 @@ class user:
         gachaSubId = None
         
         gachaSubId = GetGachaSubIdFP("JP")
-    
+
+        if gachaSubId is None:
+           gachaSubId_mo = 0
+            
         if gachaSubId == 1000:
            gachaSubId_mo = 0
         else:
