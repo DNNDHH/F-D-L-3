@@ -420,7 +420,7 @@ class user:
                 for info in resSuccess['gachaInfos']:
                     servantArray.append(
                         gacha.gachaInfoServant(
-                            info['isNew'], info['objectId'], info['sellMana'], info['sellQp']
+                            info['objectId']
                         )
                     )
 
