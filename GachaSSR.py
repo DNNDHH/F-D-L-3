@@ -61,7 +61,7 @@ def main():
                 logger.info('登录账号!')
                 instance.topLogin()
                 time.sleep(2)
-                instance.topHome())
+                instance.topHome()
                 for _ in range(100): 
                       instance.drawFF()  #呼符
                       #instance.drawS()  #石头
