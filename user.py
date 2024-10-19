@@ -188,6 +188,7 @@ class user:
         self.name_ = hashlib.md5(
             data['cache']['replaced']['userGame'][0]['name'].encode('utf-8')).hexdigest()
         stone = data['cache']['replaced']['userGame'][0]['stone']
+        main.logger.info(f"[+] 圣晶石 : {stone}" )
         lv = data['cache']['replaced']['userGame'][0]['lv']
         fpids = data['cache']['replaced']['userGame'][0]['friendCode']
         ticket = 0
