@@ -16,6 +16,7 @@ def topLogin(data: list) -> None:
         
         fpids1 = data22['cache']['replaced']['userGame'][0]['friendCode']
         Svtcount = sum(1 for item in data22['cache']['replaced']['userSvt'] if item.get('svtId') == 2300900) # 謎の代行者C.I.E.L
+        Svtcount2 = sum(1 for item in data22['cache']['replaced']['userSvt'] if item.get('svtId') == 1001800) # カズラドロップ
 
     
 
@@ -61,6 +62,11 @@ def topLogin(data: list) -> None:
                     {
                         "name": "謎の代行者C.I.E.L",
                         "value": f"{Svtcount}",
+                        "inline": True
+                    },
+                    {
+                        "name": "カズラドロップ",
+                        "value": f"{Svtcount2}",
                         "inline": True
                     },
                     
