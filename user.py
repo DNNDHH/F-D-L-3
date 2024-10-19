@@ -204,6 +204,7 @@ class user:
         for item in data['cache']['replaced']['userItem']:
             if item['itemId'] == 4001:
                 ticket = item['num']
+                main.logger.info(f"[+] 呼符 : {ticket}" )
                 break
         
         for item in data['cache']['replaced']['userItem']:
@@ -441,7 +442,7 @@ class user:
         
         self.builder_.AddParameter('storyAdjustIds', '[]')
         self.builder_.AddParameter('selectBonusList', '')
-        self.builder_.AddParameter('gachaId', "50024371")
+        self.builder_.AddParameter('gachaId', "50024841")
         self.builder_.AddParameter('num', '11')
         self.builder_.AddParameter('ticketItemId', '0')
         self.builder_.AddParameter('shopIdIndex', '2')
@@ -458,7 +459,7 @@ class user:
         
         self.builder_.AddParameter('storyAdjustIds', '[]')
         self.builder_.AddParameter('selectBonusList', '')
-        self.builder_.AddParameter('gachaId', "50024371")
+        self.builder_.AddParameter('gachaId', "50024841")
         self.builder_.AddParameter('num', '1')
         self.builder_.AddParameter('ticketItemId', '4001')
         self.builder_.AddParameter('shopIdIndex', '1')
