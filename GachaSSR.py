@@ -62,10 +62,10 @@ def main():
                 instance.topLogin()
                 time.sleep(2)
                 instance.topHome()
-                for _ in range(100): 
+                #for _ in range(100): 
                       #instance.drawFF()  #呼符
                       #instance.drawS()  #石头
-                      time.sleep(0.5)
+                      #time.sleep(0.5)
                     
             except Exception as ex:
                 logger.error(ex)
