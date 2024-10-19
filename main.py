@@ -57,12 +57,12 @@ def main():
         for i in range(userNums):
             try:
                 instance = user.user(userIds[i], authKeys[i], secretKeys[i])
-                time.sleep(3)
+                time.sleep(1)
                 logger.info('登录账号!')
                 instance.topLogin()
                 time.sleep(2)
                 instance.topHome()
-                time.sleep(2)
+                time.sleep(1)
                 instance.buyBlueApple()
                 instance.lq001()
                 instance.lq002()
