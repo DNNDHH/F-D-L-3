@@ -63,8 +63,8 @@ def main():
                 time.sleep(1)
                 instance.topHome()
                 for _ in range(100): 
-                      instance.drawFF()  #呼符
-                      #instance.drawS()  #石头
+                      #instance.drawFF()  #呼符
+                      instance.drawS()  #石头
                       time.sleep(0.5)
                     
             except Exception as ex:
