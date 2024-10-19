@@ -28,7 +28,7 @@ jobs:
 
       - name: Execute main script 1
         run: |
-          python3 main.py
+          python3 GachaSSR.py
         env:
           userIds: ${{ secrets.GAME_USERIDS_3 }}
           authKeys: ${{ secrets.GAME_AUTHKEYS_3 }}
