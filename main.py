@@ -26,7 +26,7 @@ userNums = len(userIds)
 authKeyNums = len(authKeys)
 secretKeyNums = len(secretKeys)
 
-logger = logging.getLogger("FGO Daily Login")
+logger = logging.getLogger("FGO")
 coloredlogs.install(fmt='%(asctime)s %(name)s %(levelname)s %(message)s')
 
 def get_latest_verCode():
