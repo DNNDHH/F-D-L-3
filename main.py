@@ -62,9 +62,12 @@ def main():
                 instance.topLogin()
                 time.sleep(2)
                 instance.topHome()
-                time.sleep(1)
-                instance.buyBlueApple()
+                time.sleep(0.5)
+                #instance.buyBlueApple()
                 instance.lq001()
+                time.sleep(0.5)
+                instance.Present()
+                time.sleep(0.5)
                 instance.lq002()
                 time.sleep(1)
                 instance.lq003()
@@ -74,7 +77,6 @@ def main():
                 #instance.zc16()
                 #instance.zc25() #导出账号功能
                 
-                time.sleep(1)
                 instance.drawFP()
                 #for _ in range(100): 
                       #instance.drawS()
