@@ -819,3 +819,91 @@ class user:
            main.logger.info(f"\n ========================================")
 
 
+
+    def Present(self):
+        #素材交換券
+        response = requests.get("https://api.atlasacademy.io/export/JP/nice_item.json")
+        if response.status_code == 200:
+            with open("nice_item.json", 'wb') as f:
+                f.write(response.content)
+                
+        with open('present.json', 'r', encoding='utf-8') as file:
+            data = json.load(file)
+            
+        user_present_box = data.get('cache', {}).get('replaced', {}).get('userPresentBox', [])
+        
+        first_object_id = None
+        object_id_count = 0
+        object_ids = []
+        presentIds = []
+
+        for item in user_present_box:
+            if item.get('giftType') == 2:
+                object_id = item.get('objectId')
+                presentId = item.get('presentId')
+    
+                if object_id and 10000 <= object_id <= 20000:
+                    if first_object_id is None:
+                        first_object_id = object_id
+                        
+                if object_id == first_object_id:
+                    object_id_count += 1
+                    object_ids.append(str(object_id))
+                    presentIds.append(str(presentId))
+
+                    datajs = [int(present_id) for present_id in presentIds]
+
+                    with open('Ticket.json', 'w') as f:
+                        json.dump(datajs, f, ensure_ascii=False)
+                else:
+                    continue
+
+        if first_object_id is not None:
+           
+           with open('nice_item.json', 'r', encoding='utf-8') as file:
+               itemdata = json.load(file)
+    
+           item_data = next((item for item in itemdata if item.get('id') == first_object_id), None)
+    
+           if item_data:
+               name = item_data.get('name', 'None')
+               item_selects = item_data.get('itemSelects', [])
+            
+               if item_selects:
+                   random_item = random.choice(item_selects)
+                   idxs = random_item.get('idx')
+                   gifts = random_item.get('gifts', [])
+                
+                   for gift in gifts:
+                       object_id = gift.get('objectId')
+                       
+                   item_name = next((item for item in itemdata if item.get('id') == object_id), None)
+                   namegift = item_name.get('originalName', 'None')
+
+                   with open('Ticket.json', 'r', encoding='utf-8') as file:
+                       presentdata = json.load(file)
+
+                   msgpack_data = msgpack.packb(presentdata)
+
+                   base64_encoded_data = base64.b64encode(msgpack_data).decode()
+                   
+                   self.builder_.AddParameter('presentIds', base64_encoded_data)
+                   self.builder_.AddParameter('itemSelectIdx', str(idxs))
+                   self.builder_.AddParameter('itemSelectNum', str(object_id_count))
+
+                   data = self.Post(
+                       f'{fgourl.server_addr_}/present/receive?_userId={self.user_id_}')
+    
+                   responses = data['response']
+
+                   main.logger.info(f"\n {'=' * 40} \n [+] {name} 兑换成功 \n {'=' * 40} " )
+        
+                   #webhook.Present(name, namegift, object_id_count)
+                   
+        else:
+            main.logger.info(f"\n {'=' * 40} \n [+] 礼物盒中交換券なし(´･ω･`) \n {'=' * 40} ")
+
+
+
+
+
