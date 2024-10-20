@@ -408,33 +408,6 @@ class user:
         data = self.Post(f'{fgourl.server_addr_}/gacha/draw?_userId={self.user_id_}')
         responses = data['response']
 
-        servantArray = []
-        missionArray = []
-
-        for response in responses:
-            resCode = response['resCode']
-            resSuccess = response['success']
-
-            if (resCode != "00"):
-                continue
-
-            if "gachaInfos" in resSuccess:
-                for info in resSuccess['gachaInfos']:
-                    servantArray.append(
-                        gacha.gachaInfoServant(
-                            info['objectId']
-                        )
-                    )
-
-            if "eventMissionAnnounce" in resSuccess:
-                for mission in resSuccess["eventMissionAnnounce"]:
-                    missionArray.append(
-                        gacha.EventMission(
-                            mission['message'], mission['progressFrom'], mission['progressTo'], mission['condition']
-                        )
-                    )
-
-        webhook.drawFP(servantArray, missionArray)
 
     def drawS(self):
         # 石头卡池
