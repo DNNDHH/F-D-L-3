@@ -541,6 +541,10 @@ class user:
             f'{fgourl.server_addr_}/present/list?_userId={self.user_id_}')
         
         responses = data['response']
+        
+        with open('present.json', 'w', encoding='utf-8') as file:
+            json.dump(data, file, ensure_ascii=False, indent=4)
+            
         main.logger.info(f"读取礼物盒!")
 
     def lq002(self):
