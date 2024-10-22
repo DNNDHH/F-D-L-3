@@ -669,9 +669,9 @@ class user:
                 if item.get('baseShopId') == max_base_shop_s_id:
                     closedAt = item.get('closedAt')
 
-                    response = requests.get("http://worldtimeapi.org/api/timezone/Etc/UTC")
-                    if response.status_code == 200:
-                        current_time = response.json()['unixtime']
+                    response_time = mytime.GetTimeStamp()
+                    if response_time > 1700000000:
+                        current_time = response_time
 
                         if current_time > closedAt:
                             main.logger.info(f"\n ======================================== \n 目前没有 绿方块活动(´･ω･`) \n ======================================== ")
