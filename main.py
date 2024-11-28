@@ -60,7 +60,7 @@ def main():
                 time.sleep(1)
                 logger.info('登录账号!')
                 instance.topLogin()
-                time.sleep(2)
+                time.sleep(1)
                 instance.topHome()
                 time.sleep(0.5)
                 #instance.buyBlueApple()
