@@ -3,6 +3,7 @@ import binascii
 import requests
 import main
 import CatAndMouseGame
+import os
 
 requests.urllib3.disable_warnings()
 session = requests.Session()
@@ -24,10 +25,19 @@ github_name_ = ''
 def set_latest_assets():
     global app_ver_, data_ver_, date_ver_, asset_bundle_folder_, data_server_folder_crc_, ver_code_, server_addr_
 
+    region = main.fate_region
+
+    # Set Game Server Depends of region
+
+    if region == "NA":
+        server_addr_ = "https://game.fate-go.us"
+
     # Get Latest Version of the data!
     version_str = main.get_latest_appver()
+    #main.logger.info(f"vv{version_str}")
+
     response = requests.get(
-        'https://game.fate-go.jp/gamedata/top?appVer=' + version_str).text
+        server_addr_ + '/gamedata/top?appVer=' + version_str).text
     response_data = json.loads(response)["response"][0]["success"]
 
     # Set AppVer, DataVer, DateVer
@@ -35,6 +45,8 @@ def set_latest_assets():
     data_ver_ = response_data['dataVer']
     date_ver_ = response_data['dateVer']
     ver_code_ = main.get_latest_verCode()
+
+    #main.logger.info(f"ver{ver_code_}")
 
     # Use Asset Bundle Extractor to get Folder Name
     assetbundle = CatAndMouseGame.getAssetBundle(response_data['assetbundle'])
@@ -49,13 +61,15 @@ def get_folder_data(assetbundle):
         assetbundle['folderName'].encode('utf8'))
 
 # ===== End =====
+
 user_agent_2 = os.environ.get('USER_AGENT_SECRET_2')
 
 httpheader = {
-    'Accept-Encoding': 'deflate, gzip',
-    'Content-Type': 'application/x-www-form-urlencoded',
     'User-Agent': user_agent_2,
+    'Accept-Encoding': "deflate, gzip",
+    'Content-Type': "application/x-www-form-urlencoded",
     'X-Unity-Version': "2022.3.28f1"
+
 }
 
 
