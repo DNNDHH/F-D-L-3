@@ -13,6 +13,8 @@ authKeys = os.environ['authKeys'].split(',')
 secretKeys = os.environ['secretKeys'].split(',')
 fate_region = os.environ['fateRegion']
 webhook_discord_url = os.environ['webhookDiscord']
+device_info = os.environ.get('DEVICE_INFO_SECRET')
+appCheck = os.environ.get('APP_CHECK_SECRET')
 blue_apple_cron = os.environ.get("MAKE_BLUE_APPLE")
 idempotency_key_signature = os.environ.get('IDEMPOTENCY_KEY_SIGNATURE_SECRET')
 
