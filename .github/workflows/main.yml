@@ -1,0 +1,58 @@
+name: T1
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: "30 20 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11]
+
+    steps:
+    
+      - name: Gettings files from Repo
+        uses: actions/checkout@v4
+        
+      - name: Install Requeriments
+        run: |
+          sudo apt-get install zip
+          sudo pip install -r Allb.txt
+
+      - name: Execute main script 1
+        run: |
+          python3 main.py
+        env:
+          userIds: ${{ secrets.GAME_USERIDS }}
+          authKeys: ${{ secrets.GAME_AUTHKEYS }}
+          secretKeys: ${{ secrets.GAME_SECRETKEYS }}
+          UserAgent: ${{ secrets.GAME_USERAGENT }}
+          fateRegion: ${{ secrets.GAME_REGION }}
+          webhookDiscord: ${{ secrets.DISCORD_WEBHOOK }}
+          IDEMPOTENCY_KEY_SIGNATURE_SECRET: ${{ secrets.IDEMPOTENCY_KEY_SIGNATURE_SECRET }}
+          APP_CHECK_SECRET: ${{ secrets.APP_CHECK_SECRET }}
+          
+      - name: 查找生成的文件夹
+        id: find_folders
+        run: |
+          find . -type d -name "ID_*" -exec zip -r generated_folders.zip {} +
+
+      - name: 检查工件是否存在
+        id: check_artifact
+        run: test -f generated_folders.zip
+        continue-on-error: true
+
+      - name: 上传工件
+        if: steps.check_artifact.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: 账号文件
+          path: generated_folders.zip
+ 
