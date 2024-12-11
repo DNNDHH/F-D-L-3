@@ -19,24 +19,16 @@ data_server_folder_crc_ = 0
 server_addr_ = 'https://game.fate-go.jp'
 github_token_ = ''
 github_name_ = ''
-user_agent_ = 'Dalvik/2.1.0 (Linux; U; Android 14; Pixel 5 Build/UP1A.231105.001)'
 
 
 # ==== User Info ====
 def set_latest_assets():
     global app_ver_, data_ver_, date_ver_, asset_bundle_folder_, data_server_folder_crc_, ver_code_, server_addr_
 
-    region = main.fate_region
-
-    # Set Game Server Depends of region
-
-    if region == "NA":
-        server_addr_ = "https://game.fate-go.us"
-
     # Get Latest Version of the data!
     version_str = main.get_latest_appver()
     response = requests.get(
-        server_addr_ + '/gamedata/top?appVer=' + version_str).text
+        'https://game.fate-go.jp/gamedata/top?appVer=' + version_str).text
     response_data = json.loads(response)["response"][0]["success"]
 
     # Set AppVer, DataVer, DateVer
@@ -58,12 +50,12 @@ def get_folder_data(assetbundle):
         assetbundle['folderName'].encode('utf8'))
 
 # ===== End =====
-
+user_agent_2 = os.environ.get('USER_AGENT_SECRET_2')
 
 httpheader = {
     'Accept-Encoding': 'deflate, gzip',
     'Content-Type': 'application/x-www-form-urlencoded',
-    'User-Agent': user_agent_,
+    'User-Agent': user_agent_2,
     'X-Unity-Version': "2022.3.28f1"
 }
 
