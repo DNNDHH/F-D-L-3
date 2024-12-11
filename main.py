@@ -11,18 +11,11 @@ import logging
 userIds = os.environ['userIds'].split(',')
 authKeys = os.environ['authKeys'].split(',')
 secretKeys = os.environ['secretKeys'].split(',')
-fate_region = os.environ['fateRegion']
 webhook_discord_url = os.environ['webhookDiscord']
 device_info = os.environ.get('DEVICE_INFO_SECRET')
 appCheck = os.environ.get('APP_CHECK_SECRET')
-blue_apple_cron = os.environ.get("MAKE_BLUE_APPLE")
-idempotency_key_signature = os.environ.get('IDEMPOTENCY_KEY_SIGNATURE_SECRET')
-
-
-UA = os.environ['UserAgent']
-
-if UA:
-    fgourl.user_agent_ = UA
+user_agent_2 = os.environ.get('USER_AGENT_SECRET_2')
+fate_region = 'JP'
 
 userNums = len(userIds)
 authKeyNums = len(authKeys)
@@ -32,13 +25,7 @@ logger = logging.getLogger("FGO")
 coloredlogs.install(fmt='%(asctime)s %(name)s %(levelname)s %(message)s')
 
 def get_latest_verCode():
-    endpoint = ""
-
-    if fate_region == "NA":
-        endpoint += "https://raw.githubusercontent.com/O-Isaac/FGO-VerCode-extractor/NA/VerCode.json"
-    else:
-        endpoint += "https://raw.githubusercontent.com/DNNDHH/FGO-VerCode-extractor/JP/VerCode.json"
-
+    endpoint = "https://raw.githubusercontent.com/DNNDHH/FGO-VerCode-extractor/JP/VerCode.json"
     response = requests.get(endpoint).text
     response_data = json.loads(response)
 
@@ -53,7 +40,6 @@ def get_latest_appver():
 
 def main():
     if userNums == authKeyNums and userNums == secretKeyNums:
-        logger.info('Getting Lastest Assets Info')
         fgourl.set_latest_assets()
 
         for i in range(userNums):
