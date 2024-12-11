@@ -1,7 +1,6 @@
 import json
 import binascii
 import requests
-import version
 import main
 import CatAndMouseGame
 
