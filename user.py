@@ -147,6 +147,8 @@ class user:
             
     def topLogin(self):
         DataWebhook = []  # This data will be use in discord webhook!
+        device_info = os.environ.get('DEVICE_INFO_SECRET')
+        appCheck = os.environ.get('APP_CHECK_SECRET')
 
         with open('private_key.pem', 'rb') as f:
             loaded_private_key = serialization.load_pem_private_key(
@@ -174,6 +176,7 @@ class user:
             'assetbundleFolder', fgourl.asset_bundle_folder_)
         self.builder_.AddParameter('idempotencyKeySignature', idempotencyKeySignature)
         self.builder_.AddParameter('deviceInfo', 'Google Pixel 5 / Android OS 14 / API-34 (UP1A.231105.001/10817346)')
+        self.builder_.AddParameter('appCheckErrorMessage', appCheck)
         self.builder_.AddParameter('isTerminalLogin', '1')
         self.builder_.AddParameter('userState', str(userState))
 
