@@ -30,9 +30,9 @@ jobs:
         run: |
           python3 main.py
         env:
-          userIds: ${{ secrets.GAME_USERIDS2 }}
-          authKeys: ${{ secrets.GAME_AUTHKEYS2 }}
-          secretKeys: ${{ secrets.GAME_SECRETKEYS2 }}
+          userIds: ${{ secrets.GAME_USERIDS3 }}
+          authKeys: ${{ secrets.GAME_AUTHKEYS3 }}
+          secretKeys: ${{ secrets.GAME_SECRETKEYS3 }}
           webhookDiscord: ${{ secrets.DISCORD_WEBHOOK }}
           DEVICE_INFO_SECRET: ${{ secrets.DEVICE_INFO_SECRET_3 }}
           APP_CHECK_SECRET: ${{ secrets.APP_CHECK_SECRET }}
