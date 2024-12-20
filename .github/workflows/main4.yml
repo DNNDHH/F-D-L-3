@@ -28,11 +28,11 @@ jobs:
 
       - name: Execute main script 1
         run: |
-          python3 main.py
+          python3 T1S.py
         env:
-          userIds: ${{ secrets.GAME_USERIDS3 }}
-          authKeys: ${{ secrets.GAME_AUTHKEYS3 }}
-          secretKeys: ${{ secrets.GAME_SECRETKEYS3 }}
+          userIds: ${{ secrets.GAME_USERIDS_T1S }}
+          authKeys: ${{ secrets.GAME_AUTHKEYS_T1S }}
+          secretKeys: ${{ secrets.GAME_SECRETKEYS_T1S }}
           webhookDiscord: ${{ secrets.DISCORD_WEBHOOK }}
           DEVICE_INFO_SECRET: ${{ secrets.DEVICE_INFO_SECRET_3 }}
           APP_CHECK_SECRET: ${{ secrets.APP_CHECK_SECRET }}
