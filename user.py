@@ -412,6 +412,34 @@ class user:
         responses = data['response']
 
 
+
+
+    def drawFPT1S(self):
+        gachaSubId = GetGachaSubIdFP("JP")
+
+        #if gachaSubId is None:
+           #gachaSubId_mo = 0
+            
+        if gachaSubId is None:
+           gachaSubId = 0
+            
+        self.builder_.AddParameter('storyAdjustIds', '[]')
+        self.builder_.AddParameter('selectBonusList', '')
+        self.builder_.AddParameter('gachaId', '1')
+        self.builder_.AddParameter('num', '10')
+        self.builder_.AddParameter('ticketItemId', '0')
+        self.builder_.AddParameter('shopIdIndex', '1')
+        self.builder_.AddParameter('gachaSubId', gachaSubId)
+
+        main.logger.info(f"\n ======================================== \n [+] 友情卡池ID : {gachaSubId}\n ======================================== " )
+        data = self.Post(f'{fgourl.server_addr_}/gacha/draw?_userId={self.user_id_}')
+        responses = data['response']
+
+
+
+
+    
+
     def drawS(self):
         # 石头卡池
         #謎の代行者C.I.E.L
