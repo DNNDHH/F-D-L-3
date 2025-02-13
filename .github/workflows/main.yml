@@ -24,7 +24,7 @@ jobs:
       - name: Install Requeriments
         run: |
           sudo apt-get install zip
-          sudo pip install -r Allb.txt
+          pip install -r Allb.txt
 
       - name: Execute main script 1
         run: |
