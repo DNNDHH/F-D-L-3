@@ -51,6 +51,7 @@ def main():
                 time.sleep(1)
                 instance.topHome()
                 time.sleep(0.5)
+                instance.externalPayment()
                 instance.buyBlueApple()
                 instance.lq001()
                 time.sleep(0.5)
