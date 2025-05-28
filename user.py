@@ -473,11 +473,18 @@ class user:
 
         responses = data['response']
         main.logger.info(f"[+] 呼符 抽卡成功" )
+
+
     
     def topHome(self):
         self.Post(f'{fgourl.server_addr_}/home/top?_userId={self.user_id_}')
 
+    
+    def externalPayment(self):
+        self.Post(f'{fgourl.server_addr_}/externalPayment/reflect?_userId={self.user_id_}')
 
+
+    
     def zc15(self):
         # 抽卡设定
         # https://game.fate-go.jp/userStatus/flagSet?_userId=
