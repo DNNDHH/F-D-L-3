@@ -479,9 +479,9 @@ class user:
     def topHome(self):
         self.Post(f'{fgourl.server_addr_}/home/top?_userId={self.user_id_}')
         
-        time.sleep(0.5)
+        time.sleep(2)
         self.Post(f'{fgourl.server_addr_}/externalPayment/reflect?_userId={self.user_id_}')
-        time.sleep(0.5)
+        time.sleep(1)
         self.Post(f'{fgourl.server_addr_}/externalPayment/reflect?_userId={self.user_id_}')
 
     
