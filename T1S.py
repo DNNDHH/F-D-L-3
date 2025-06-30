@@ -60,6 +60,8 @@ def main():
                 time.sleep(1)
                 instance.lq003()
                 time.sleep(1)
+                instance.buyitem_myseif()
+                time.sleep(1)
                 instance.zc15()
                 
                 #instance.zc16()
