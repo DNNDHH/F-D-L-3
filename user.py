@@ -325,6 +325,26 @@ class user:
         webhook.topLogin(DataWebhook)
 
 
+    def buyitem_myseif(self): 
+        with open('login.json', 'r', encoding='utf-8') as file:
+            data_item = json.load(file)
+
+        for item in data_item['cache']['replaced']['userItem']:
+            if item['itemId'] == 94146601:
+                ticket = item['num']
+                main.logger.info(f"[+] OVER THE SAME SKY 英霊星行チケット : {ticket}" )
+                
+                self.builder_.AddParameter('id', '80553012') # 英霊星行：ジャンヌ・ダルク
+                self.builder_.AddParameter('num', '1')
+
+                data = self.Post(f'{fgourl.server_addr_}/shop/purchase?_userId={self.user_id_}')
+                main.logger.info(f"[+] 已购买 英霊星行：ジャンヌ・ダルク" )
+            else:
+                pass
+
+
+    
+
     def buyBlueApple(self):
         with open('login.json', 'r', encoding='utf-8') as file:
             data = json.load(file)
@@ -568,7 +588,7 @@ class user:
 
         present_ids = []
         for item in data['cache']['replaced']['userPresentBox']:
-            if item['objectId'] in [2, 6, 11, 16, 3, 46, 18, 48, 4001, 100, 101, 102, 103, 104, 1, 4, 7998, 7999, 1000, 2000, 6999, 9570400, 9670400, 9670500, 9570500, 94146601, 9309130]:
+            if item['objectId'] in [2, 6, 11, 16, 3, 46, 18, 48, 4001, 100, 101, 102, 103, 104, 1, 4, 7998, 7999, 1000, 2000, 6999, 9570400, 9670400, 9670500, 9570500, 94146601, 9309130, 9309160]:
                 present_ids.append(str(item['presentId']))
 
         with open('JJM.json', 'w') as f:
