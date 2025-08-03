@@ -28,7 +28,7 @@ jobs:
 
       - name: Execute main script 1
         run: |
-          python3 T1S.py
+          python3
         env:
           userIds: ${{ secrets.GAME_USERIDS_T1S }}
           authKeys: ${{ secrets.GAME_AUTHKEYS_T1S }}
