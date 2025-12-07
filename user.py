@@ -941,6 +941,44 @@ class user:
             main.logger.info(f"\n {'=' * 40} \n [+] 礼物盒中交換券なし(´･ω･`) \n {'=' * 40} ")
 
 
+    def Free_Gacha(self):
+        # 
 
+        gachaId = 21001
+        gachaSubId = 0
+
+        self.builder_.AddParameter('storyAdjustIds', '[]')
+        self.builder_.AddParameter('selectBonusList', '')
+        self.builder_.AddParameter('gachaId', str(gachaId))
+        self.builder_.AddParameter('num', '1')
+        self.builder_.AddParameter('ticketItemId', '0')
+        self.builder_.AddParameter('shopIdIndex', '1')
+        self.builder_.AddParameter('gachaSubId', str(gachaSubId))
+                
+        main.logger.info(f"\n {'=' * 40} \n [+] GachaId：{gachaId} SubId：{gachaSubId} \n {'=' * 40} ")
+        data = self.Post(f'{fgourl.server_addr_}/gacha/draw?_userId={self.user_id_}')
+                
+        responses = data['response']
+
+        servantArray = []
+        missionArray = []
+
+        for response in responses:
+            resCode = response['resCode']
+            resSuccess = response['success']
+
+            if (resCode != "00"):
+                continue
+
+            if "gachaInfos" in resSuccess:
+                for info in resSuccess['gachaInfos']:
+                    servantArray.append(
+                        gacha.gachaInfoServant(
+                            info['objectId']
+                        )
+                    )
+
+        webhook.Free_Gacha(servantArray)
+        return
 
 
