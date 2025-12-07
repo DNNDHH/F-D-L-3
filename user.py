@@ -942,7 +942,6 @@ class user:
 
 
     def Free_Gacha(self):
-        # 
 
         gachaId = 21001
         gachaSubId = 0
@@ -955,30 +954,8 @@ class user:
         self.builder_.AddParameter('shopIdIndex', '1')
         self.builder_.AddParameter('gachaSubId', str(gachaSubId))
                 
-        main.logger.info(f"\n {'=' * 40} \n [+] GachaId：{gachaId} SubId：{gachaSubId} \n {'=' * 40} ")
+        main.logger.info(f"\n {'=' * 40} \n [+] 每日免费单抽 GachaId：{gachaId} SubId：{gachaSubId} \n {'=' * 40} ")
         data = self.Post(f'{fgourl.server_addr_}/gacha/draw?_userId={self.user_id_}')
                 
         responses = data['response']
-
-        servantArray = []
-        missionArray = []
-
-        for response in responses:
-            resCode = response['resCode']
-            resSuccess = response['success']
-
-            if (resCode != "00"):
-                continue
-
-            if "gachaInfos" in resSuccess:
-                for info in resSuccess['gachaInfos']:
-                    servantArray.append(
-                        gacha.gachaInfoServant(
-                            info['objectId']
-                        )
-                    )
-
-        webhook.Free_Gacha(servantArray)
-        return
-
 
