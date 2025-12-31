@@ -67,7 +67,7 @@ def main():
                 #instance.zc16()
                 #instance.zc25() #导出账号功能
                 
-                instance.Free_Gacha()
+                #instance.Free_Gacha()
                 
                 instance.drawFP()
                 #for _ in range(100): 
