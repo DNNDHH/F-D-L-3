@@ -51,7 +51,7 @@ def main():
                 time.sleep(1)
                 instance.topHome()
                 time.sleep(0.5)
-                #instance.buyBlueApple()
+                
                 instance.lq001()
                 time.sleep(0.5)
                 instance.Present()
@@ -60,7 +60,9 @@ def main():
                 time.sleep(1)
                 instance.lq003()
                 time.sleep(1)
+                
                 #instance.buyitem_myseif()
+                
                 time.sleep(1)
                 instance.zc15()
                 
@@ -74,6 +76,7 @@ def main():
                       #instance.drawS()
                       #instance.drawFF()
                       #time.sleep(1)
+                instance.buyBlueApple()
                     
             except Exception as ex:
                 logger.error(ex)
