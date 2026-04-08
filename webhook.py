@@ -17,6 +17,7 @@ def topLogin(data: list) -> None:
         fpids1 = data22['cache']['replaced']['userGame'][0]['friendCode']
         #Svtcount = sum(1 for item in data22['cache']['replaced']['userSvt'] if item.get('svtId') == 2300900) # 謎の代行者C.I.E.L
         #Svtcount2 = sum(1 for item in data22['cache']['replaced']['userSvt'] if item.get('svtId') == 1001800) # カズラドロップ
+    #(stone, lv, fpids, ticket, goldenfruit, silverfruit, bronzefruit, bluebronzesapling, bluebronzefruit, pureprism, sqf01, holygrail)
 
     
 
@@ -52,6 +53,11 @@ def topLogin(data: list) -> None:
                     {
                         "name": "圣晶石",
                         "value": f"{rewards.stone}",
+                        "inline": True
+                    },                    
+                    {
+                        "name": "苹果",
+                        "value": f"金：{rewards.goldenfruit} 银：{rewards.silverfruit} ",
                         "inline": True
                     },
                     {
