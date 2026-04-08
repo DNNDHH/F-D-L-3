@@ -57,7 +57,7 @@ def topLogin(data: list) -> None:
                     },                    
                     {
                         "name": "苹果",
-                        "value": f"金：{rewards.goldenfruit} 银：{rewards.silverfruit} ",
+                        "value": f"金:{rewards.goldenfruit} \n银:{rewards.silverfruit} ",
                         "inline": True
                     },
                     {
