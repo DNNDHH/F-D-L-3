@@ -7,7 +7,7 @@ import user
 import coloredlogs
 import logging
 
-# Enviroments Variables
+# Enviroments Variables 
 userIds = os.environ['userIds'].split(',')
 authKeys = os.environ['authKeys'].split(',')
 secretKeys = os.environ['secretKeys'].split(',')
