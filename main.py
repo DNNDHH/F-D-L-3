@@ -67,7 +67,7 @@ def main():
                 instance.zc15()
                 
                 #instance.zc16()
-                instance.zc25() #导出账号功能
+                #instance.zc25() #导出账号功能
                 
                 #instance.Free_Gacha()
                 
