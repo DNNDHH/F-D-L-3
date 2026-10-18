@@ -65,6 +65,11 @@ def topLogin(data: list) -> None:
                         "value": f"{login.remaining_ap}",
                         "inline": True
                     },
+                    {
+                        "name": "day",
+                        "value": f"{login.login_days} / {login.total_days}",
+                        "inline": True
+                    },
                 ],
                 "thumbnail": {
                     "url": "https://www.fate-go.jp/manga_fgo/images/commnet_chara01.png"
