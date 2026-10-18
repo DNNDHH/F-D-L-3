@@ -194,8 +194,6 @@ class user:
         #main.logger.info(f"[+] 圣晶石 : {stone}" )
         lv = data['cache']['replaced']['userGame'][0]['lv']
         fpids = data['cache']['replaced']['userGame'][0]['friendCode']
-        seqLoginCount = data['cache']['updated']['userLogin'][0]['seqLoginCount']
-        totalLoginCount = data['cache']['updated']['userLogin'][0]['totalLoginCount']
         ticket = 0
         goldenfruit = 0
         silverfruit = 0
@@ -253,7 +251,7 @@ class user:
                 break
 
         
-        rewards = Rewards(stone, lv, fpids, ticket, goldenfruit, silverfruit, bronzefruit, bluebronzesapling, bluebronzefruit, pureprism, sqf01, holygrail, seqLoginCount, totalLoginCount)
+        rewards = Rewards(stone, lv, fpids, ticket, goldenfruit, silverfruit, bronzefruit, bluebronzesapling, bluebronzefruit, pureprism, sqf01, holygrail)
 
         DataWebhook.append(rewards)
 
