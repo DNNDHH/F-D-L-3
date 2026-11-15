@@ -45,10 +45,7 @@ def main():
         for i in range(userNums):
             try:
                 instance = user.user(userIds[i], authKeys[i], secretKeys[i])
-                time.sleep(1)
-                logger.info('登录账号!')
                 instance.topLogin()
-                time.sleep(1)
                 instance.topHome()
                 time.sleep(0.5)
                 instance.buyBlueApple()
@@ -61,7 +58,6 @@ def main():
                 instance.lq003()
                 time.sleep(1)
                 #instance.buyitem_myseif()
-                time.sleep(1)
                 instance.zc15()
                 
                 #instance.zc16()
